@@ -1,0 +1,12 @@
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.csprojResolveAssemblyReference.cache
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.Properties.Resources.resources
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.csproj.GenerateResource.Cache
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\bin\Debug\LKK.exe
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\bin\Debug\LKK.pdb
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\bin\Debug\System.Data.SQLite.dll
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\bin\Debug\System.Data.SQLite.pdb
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.exe
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.pdb
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.Form1.resources
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\bin\Debug\LKK.exe.config
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.lkkMain.resources
