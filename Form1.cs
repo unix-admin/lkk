@@ -10,6 +10,8 @@ namespace LKK
 {
     public partial class Form1 : Form
     {
+        Database data = new Database();
+
         public Form1()
         {
             InitializeComponent();
@@ -17,8 +19,21 @@ namespace LKK
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Database data = new Database();
+            
+                       
+        }
+
+        private void recreateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
             data.createDatabase();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lkkMain insertData = new lkkMain();
+            insertData.MdiParent = this;
+            insertData.Show();
 
         }       
     }

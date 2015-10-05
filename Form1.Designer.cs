@@ -47,9 +47,9 @@
             this.administerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutSoftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,8 +97,9 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "new";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // changeToolStripMenuItem
             // 
@@ -197,6 +198,13 @@
             this.restoreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.restoreToolStripMenuItem.Text = "restore";
             // 
+            // recreateToolStripMenuItem
+            // 
+            this.recreateToolStripMenuItem.Name = "recreateToolStripMenuItem";
+            this.recreateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.recreateToolStripMenuItem.Text = "recreate";
+            this.recreateToolStripMenuItem.Click += new System.EventHandler(this.recreateToolStripMenuItem_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -210,12 +218,6 @@
             this.aboutSoftToolStripMenuItem.Name = "aboutSoftToolStripMenuItem";
             this.aboutSoftToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.aboutSoftToolStripMenuItem.Text = "aboutSoft";
-            // 
-            // recreateToolStripMenuItem
-            // 
-            this.recreateToolStripMenuItem.Name = "recreateToolStripMenuItem";
-            this.recreateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.recreateToolStripMenuItem.Text = "recreate";
             // 
             // Form1
             // 

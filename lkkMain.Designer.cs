@@ -105,10 +105,13 @@
             // 
             // department
             // 
+            this.department.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.department.FormattingEnabled = true;
+            this.department.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.department.Location = new System.Drawing.Point(82, 42);
             this.department.Name = "department";
             this.department.Size = new System.Drawing.Size(196, 21);
+            this.department.Sorted = true;
             this.department.TabIndex = 4;
             // 
             // label3
@@ -131,10 +134,12 @@
             // 
             // doctor
             // 
+            this.doctor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.doctor.FormattingEnabled = true;
             this.doctor.Location = new System.Drawing.Point(370, 45);
             this.doctor.Name = "doctor";
             this.doctor.Size = new System.Drawing.Size(181, 21);
+            this.doctor.Sorted = true;
             this.doctor.TabIndex = 6;
             // 
             // addDepartment
@@ -232,11 +237,15 @@
             // 
             // region
             // 
+            this.region.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.region.FormattingEnabled = true;
             this.region.Location = new System.Drawing.Point(392, 108);
             this.region.Name = "region";
             this.region.Size = new System.Drawing.Size(159, 21);
+            this.region.Sorted = true;
             this.region.TabIndex = 18;
+            this.region.SelectedIndexChanged += new System.EventHandler(this.region_SelectedIndexChanged);
+            this.region.SelectionChangeCommitted += new System.EventHandler(this.region_SelectionChangeCommitted);
             // 
             // addRegion
             // 
@@ -306,6 +315,7 @@
             // 
             // town
             // 
+            this.town.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.town.FormattingEnabled = true;
             this.town.Location = new System.Drawing.Point(82, 134);
             this.town.Name = "town";
@@ -397,6 +407,7 @@
             this.toDatabase.TabIndex = 39;
             this.toDatabase.Text = "В базу";
             this.toDatabase.UseVisualStyleBackColor = true;
+            this.toDatabase.Click += new System.EventHandler(this.toDatabase_Click);
             // 
             // addLkk
             // 
@@ -462,7 +473,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lkkDate);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(617, 679);
+            this.MinimizeBox = false;
             this.Name = "lkkMain";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "lkkMain";
             this.ResumeLayout(false);
             this.PerformLayout();
