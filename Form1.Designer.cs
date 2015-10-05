@@ -97,7 +97,7 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.newToolStripMenuItem.Text = "new";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -139,12 +139,14 @@
             this.doctrosToolStripMenuItem.Name = "doctrosToolStripMenuItem";
             this.doctrosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.doctrosToolStripMenuItem.Text = "doctros";
+            this.doctrosToolStripMenuItem.Click += new System.EventHandler(this.doctrosToolStripMenuItem_Click);
             // 
             // regionsToolStripMenuItem
             // 
             this.regionsToolStripMenuItem.Name = "regionsToolStripMenuItem";
             this.regionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.regionsToolStripMenuItem.Text = "regions";
+            this.regionsToolStripMenuItem.Click += new System.EventHandler(this.regionsToolStripMenuItem_Click);
             // 
             // townsToolStripMenuItem
             // 
@@ -157,6 +159,7 @@
             this.departmentsToolStripMenuItem.Name = "departmentsToolStripMenuItem";
             this.departmentsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.departmentsToolStripMenuItem.Text = "departments";
+            this.departmentsToolStripMenuItem.Click += new System.EventHandler(this.departmentsToolStripMenuItem_Click);
             // 
             // membersToolStripMenuItem
             // 
@@ -169,12 +172,14 @@
             this.diagnosesToolStripMenuItem.Name = "diagnosesToolStripMenuItem";
             this.diagnosesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.diagnosesToolStripMenuItem.Text = "diagnoses";
+            this.diagnosesToolStripMenuItem.Click += new System.EventHandler(this.diagnosesToolStripMenuItem_Click);
             // 
             // inferenceToolStripMenuItem
             // 
             this.inferenceToolStripMenuItem.Name = "inferenceToolStripMenuItem";
             this.inferenceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.inferenceToolStripMenuItem.Text = "inference";
+            this.inferenceToolStripMenuItem.Click += new System.EventHandler(this.inferenceToolStripMenuItem_Click);
             // 
             // administerToolStripMenuItem
             // 
@@ -189,19 +194,19 @@
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.backupToolStripMenuItem.Text = "backup";
             // 
             // restoreToolStripMenuItem
             // 
             this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
-            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.restoreToolStripMenuItem.Text = "restore";
             // 
             // recreateToolStripMenuItem
             // 
             this.recreateToolStripMenuItem.Name = "recreateToolStripMenuItem";
-            this.recreateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.recreateToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.recreateToolStripMenuItem.Text = "recreate";
             this.recreateToolStripMenuItem.Click += new System.EventHandler(this.recreateToolStripMenuItem_Click);
             // 

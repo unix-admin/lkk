@@ -10,3 +10,15 @@ d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.pdb
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.Form1.resources
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\bin\Debug\LKK.exe.config
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.lkkMain.resources
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\bin\Debug\LKK.exe.config
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.exe
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.pdb
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\bin\Debug\LKK.exe
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\bin\Debug\LKK.pdb
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\bin\Debug\System.Data.SQLite.pdb
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.csprojResolveAssemblyReference.cache
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.Form1.resources
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.lkkMain.resources
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.Properties.Resources.resources
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.csproj.GenerateResource.Cache
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.formData.resources

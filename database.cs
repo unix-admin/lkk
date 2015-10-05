@@ -102,7 +102,7 @@ namespace LKK
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT towns.type || '. ' ||towns.town AS town FROM towns WHERE towns.regionID=(SELECT id FROM regions WHERE regions.title=:regionName)";
+           selectData.CommandText = "SELECT towns.type || '.' ||towns.town AS town FROM towns WHERE towns.regionID=(SELECT id FROM regions WHERE regions.title=:regionName)";
            selectData.Parameters.Add(":regionName", DbType.String);
            selectData.Parameters[":regionName"].Value = regionName;           
            data.SelectCommand = selectData;
@@ -111,7 +111,19 @@ namespace LKK
            disconnect();
            return towns;
        }
-
+       public DataTable getDoctors() 
+       {
+           DataTable doctors = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT fio FROM doctors";
+           data.SelectCommand = selectData;
+           connect();
+           data.Fill(doctors);
+           disconnect();
+           return doctors;
+       }
 
     }
 }

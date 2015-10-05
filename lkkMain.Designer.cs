@@ -159,6 +159,7 @@
             this.addDoctor.TabIndex = 9;
             this.addDoctor.Text = "+";
             this.addDoctor.UseVisualStyleBackColor = true;
+            this.addDoctor.Click += new System.EventHandler(this.addDoctor_Click);
             // 
             // name
             // 

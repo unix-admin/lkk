@@ -35,6 +35,36 @@ namespace LKK
             insertData.MdiParent = this;
             insertData.Show();
 
+        }
+
+        private void doctrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formData data = new formData(formData.formTypes.DOCTORS);
+            data.ShowDialog();
+        }
+
+        private void regionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formData data = new formData(formData.formTypes.REGIONS);
+            data.ShowDialog();
+        }
+
+        private void departmentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formData data = new formData(formData.formTypes.DEPARTMENTS);
+            data.ShowDialog();
+        }
+
+        private void diagnosesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formData data = new formData();
+            data.ShowDialog();
+        }
+
+        private void inferenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formData data = new formData(formData.formTypes.INFERENCE);
+            data.ShowDialog();
         }       
     }
 }

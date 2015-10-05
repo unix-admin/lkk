@@ -48,8 +48,13 @@ namespace LKK
 
             string[] words = town.Text.Split('.');
             string a = words[0];
+            string b = words[words.Length - 1]; 
+        }
 
-            
+        private void addDoctor_Click(object sender, EventArgs e)
+        {
+            formData data = new formData(formData.formTypes.DOCTORS);
+            data.ShowDialog();
             
         }
     }
