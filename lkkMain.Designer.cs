@@ -188,7 +188,11 @@
             // 
             // sex
             // 
+            this.sex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.sex.FormattingEnabled = true;
+            this.sex.Items.AddRange(new object[] {
+            "Ж",
+            "Ч"});
             this.sex.Location = new System.Drawing.Point(82, 104);
             this.sex.Name = "sex";
             this.sex.Size = new System.Drawing.Size(51, 21);
@@ -256,6 +260,7 @@
             this.addRegion.TabIndex = 20;
             this.addRegion.Text = "+";
             this.addRegion.UseVisualStyleBackColor = true;
+            this.addRegion.Click += new System.EventHandler(this.addRegion_Click);
             // 
             // label10
             // 
@@ -427,6 +432,7 @@
             this.addDiagnose.TabIndex = 40;
             this.addDiagnose.Text = "+";
             this.addDiagnose.UseVisualStyleBackColor = true;
+            this.addDiagnose.Click += new System.EventHandler(this.addDiagnose_Click);
             // 
             // lkkMain
             // 

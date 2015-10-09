@@ -125,5 +125,18 @@ namespace LKK
            return doctors;
        }
 
+       public DataTable getDiagnose()
+       {
+           DataTable diagnose = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT title FROM diagnose";
+           data.SelectCommand = selectData;
+           connect();
+           data.Fill(diagnose);
+           disconnect();
+           return diagnose;
+       }
     }
 }

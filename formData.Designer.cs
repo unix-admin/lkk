@@ -92,6 +92,7 @@
             this.MinimizeBox = false;
             this.Name = "formData";
             this.Text = "formData";
+            this.Shown += new System.EventHandler(this.formData_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

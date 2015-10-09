@@ -53,8 +53,22 @@ namespace LKK
 
         private void addDoctor_Click(object sender, EventArgs e)
         {
-            formData data = new formData(formData.formTypes.DOCTORS);
-            data.ShowDialog();
+            
+            
+        }
+
+        private void addDiagnose_Click(object sender, EventArgs e)
+        {
+            formData diagnosis = new formData();
+            diagnosis.setFormType(formData.formTypes.DIAGNOSE);
+            
+            diagnosis.ShowDialog();
+
+            
+        }
+
+        private void addRegion_Click(object sender, EventArgs e)
+        {
             
         }
     }
