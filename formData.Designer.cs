@@ -32,6 +32,7 @@
             this.insertButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
+            this.mainDs = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,19 +51,21 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(687, 236);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // insertButton
             // 
-            this.insertButton.Location = new System.Drawing.Point(13, 264);
+            this.insertButton.Location = new System.Drawing.Point(220, 265);
             this.insertButton.Name = "insertButton";
             this.insertButton.Size = new System.Drawing.Size(75, 23);
             this.insertButton.TabIndex = 1;
             this.insertButton.Text = "insertData";
             this.insertButton.UseVisualStyleBackColor = true;
+            this.insertButton.Click += new System.EventHandler(this.insertButton_Click);
             // 
             // editButton
             // 
-            this.editButton.Location = new System.Drawing.Point(154, 264);
+            this.editButton.Location = new System.Drawing.Point(361, 265);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(75, 23);
             this.editButton.TabIndex = 2;
@@ -71,18 +74,32 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(301, 264);
+            this.deleteButton.Location = new System.Drawing.Point(508, 265);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(75, 23);
             this.deleteButton.TabIndex = 3;
             this.deleteButton.Text = "modifyData";
             this.deleteButton.UseVisualStyleBackColor = true;
             // 
+            // mainDs
+            // 
+            this.mainDs.AutoSize = true;
+            this.mainDs.Checked = true;
+            this.mainDs.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mainDs.Location = new System.Drawing.Point(13, 265);
+            this.mainDs.Name = "mainDs";
+            this.mainDs.Size = new System.Drawing.Size(146, 17);
+            this.mainDs.TabIndex = 4;
+            this.mainDs.Text = "Использовать код МКБ";
+            this.mainDs.UseVisualStyleBackColor = true;
+            this.mainDs.Visible = false;
+            // 
             // formData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(712, 309);
+            this.Controls.Add(this.mainDs);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.insertButton);
@@ -95,6 +112,7 @@
             this.Shown += new System.EventHandler(this.formData_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -104,5 +122,6 @@
         private System.Windows.Forms.Button insertButton;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.CheckBox mainDs;
     }
 }

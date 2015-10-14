@@ -61,7 +61,8 @@ namespace LKK
         {
             formData diagnosis = new formData();
             diagnosis.setFormType(formData.formTypes.DIAGNOSE);
-            
+            diagnosis.setFormActions(formData.formActions.WORK);
+            diagnosis.getTextArea(ref diagnose);
             diagnosis.ShowDialog();
 
             
@@ -70,6 +71,16 @@ namespace LKK
         private void addRegion_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void addLkk_Click(object sender, EventArgs e)
+        {
+            formData LKK = new formData();
+            LKK.setFormType(formData.formTypes.INFERENCELKK);
+            LKK.setFormActions(formData.formActions.WORK);
+            LKK.ShowDialog();
+
+
         }
     }
 }

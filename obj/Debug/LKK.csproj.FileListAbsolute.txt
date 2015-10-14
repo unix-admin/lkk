@@ -23,3 +23,4 @@ C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.Properties.
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.csproj.GenerateResource.Cache
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.formData.resources
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.formData.resources
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.addData.resources

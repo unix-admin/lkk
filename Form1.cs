@@ -39,31 +39,41 @@ namespace LKK
 
         private void doctrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            formData data = new formData(formData.formTypes.DOCTORS);
+            formData data = new formData();
+            data.setFormType(formData.formTypes.DOCTORS);
+            data.setFormActions(formData.formActions.ADD);
             data.ShowDialog();
         }
 
         private void regionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            formData data = new formData(formData.formTypes.REGIONS);
+            formData data = new formData();
+            data.setFormType(formData.formTypes.REGIONS);
+            data.setFormActions(formData.formActions.ADD);
             data.ShowDialog();
         }
 
         private void departmentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            formData data = new formData(formData.formTypes.DEPARTMENTS);
+            formData data = new formData();
+            data.setFormType(formData.formTypes.DEPARTMENTS);
+            data.setFormActions(formData.formActions.ADD);
             data.ShowDialog();
         }
 
         private void diagnosesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             formData data = new formData();
+            data.setFormType(formData.formTypes.DIAGNOSE);
+            data.setFormActions(formData.formActions.ADD);
             data.ShowDialog();
         }
 
         private void inferenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            formData data = new formData(formData.formTypes.INFERENCE);
+            formData data = new formData();
+            data.setFormType(formData.formTypes.INFERENCELKK);
+            data.setFormActions(formData.formActions.ADD);
             data.ShowDialog();
         }       
     }

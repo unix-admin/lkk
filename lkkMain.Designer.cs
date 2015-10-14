@@ -423,6 +423,7 @@
             this.addLkk.TabIndex = 41;
             this.addLkk.Text = "+";
             this.addLkk.UseVisualStyleBackColor = true;
+            this.addLkk.Click += new System.EventHandler(this.addLkk_Click);
             // 
             // addDiagnose
             // 

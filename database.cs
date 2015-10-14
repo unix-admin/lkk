@@ -131,12 +131,25 @@ namespace LKK
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT title FROM diagnose";
+           selectData.CommandText = "SELECT codeMKB, title FROM diagnosis";
            data.SelectCommand = selectData;
            connect();
            data.Fill(diagnose);
            disconnect();
            return diagnose;
+       }
+       public DataTable getLKK()
+       {
+           DataTable LKK = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT title FROM LKK";
+           data.SelectCommand = selectData;
+           connect();
+           data.Fill(LKK);
+           disconnect();
+           return LKK;
        }
     }
 }
