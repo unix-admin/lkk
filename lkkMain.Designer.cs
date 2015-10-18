@@ -69,6 +69,7 @@
             this.toDatabase = new System.Windows.Forms.Button();
             this.addLkk = new System.Windows.Forms.Button();
             this.addDiagnose = new System.Windows.Forms.Button();
+            this.print = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -150,6 +151,7 @@
             this.addDepartment.TabIndex = 8;
             this.addDepartment.Text = "+";
             this.addDepartment.UseVisualStyleBackColor = true;
+            this.addDepartment.Click += new System.EventHandler(this.addDepartment_Click);
             // 
             // addDoctor
             // 
@@ -204,7 +206,6 @@
             this.yearBirth.Name = "yearBirth";
             this.yearBirth.Size = new System.Drawing.Size(49, 20);
             this.yearBirth.TabIndex = 15;
-            this.yearBirth.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label7
             // 
@@ -249,7 +250,6 @@
             this.region.Size = new System.Drawing.Size(159, 21);
             this.region.Sorted = true;
             this.region.TabIndex = 18;
-            this.region.SelectedIndexChanged += new System.EventHandler(this.region_SelectedIndexChanged);
             this.region.SelectionChangeCommitted += new System.EventHandler(this.region_SelectionChangeCommitted);
             // 
             // addRegion
@@ -336,6 +336,7 @@
             this.addTown.TabIndex = 30;
             this.addTown.Text = "+";
             this.addTown.UseVisualStyleBackColor = true;
+            this.addTown.Click += new System.EventHandler(this.addTown_Click);
             // 
             // label14
             // 
@@ -407,9 +408,9 @@
             // 
             // toDatabase
             // 
-            this.toDatabase.Location = new System.Drawing.Point(82, 605);
+            this.toDatabase.Location = new System.Drawing.Point(93, 606);
             this.toDatabase.Name = "toDatabase";
-            this.toDatabase.Size = new System.Drawing.Size(500, 23);
+            this.toDatabase.Size = new System.Drawing.Size(480, 23);
             this.toDatabase.TabIndex = 39;
             this.toDatabase.Text = "В базу";
             this.toDatabase.UseVisualStyleBackColor = true;
@@ -435,11 +436,24 @@
             this.addDiagnose.UseVisualStyleBackColor = true;
             this.addDiagnose.Click += new System.EventHandler(this.addDiagnose_Click);
             // 
+            // print
+            // 
+            this.print.AutoSize = true;
+            this.print.Checked = true;
+            this.print.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.print.Location = new System.Drawing.Point(11, 609);
+            this.print.Name = "print";
+            this.print.Size = new System.Drawing.Size(80, 17);
+            this.print.TabIndex = 42;
+            this.print.Text = "Друкувати";
+            this.print.UseVisualStyleBackColor = true;
+            // 
             // lkkMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 640);
+            this.ClientSize = new System.Drawing.Size(601, 652);
+            this.Controls.Add(this.print);
             this.Controls.Add(this.addLkk);
             this.Controls.Add(this.addDiagnose);
             this.Controls.Add(this.toDatabase);
@@ -482,7 +496,6 @@
             this.Controls.Add(this.lkkDate);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(617, 679);
             this.MinimizeBox = false;
             this.Name = "lkkMain";
             this.ShowInTaskbar = false;
@@ -536,5 +549,6 @@
         private System.Windows.Forms.Button toDatabase;
         private System.Windows.Forms.Button addLkk;
         private System.Windows.Forms.Button addDiagnose;
+        private System.Windows.Forms.CheckBox print;
     }
 }

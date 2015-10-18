@@ -23,7 +23,7 @@ namespace LKK
         };
         public enum formActions
         {
-             ADD = 0
+             VIEW = 0
             ,WORK
         }
         private formTypes formType;
@@ -55,6 +55,8 @@ namespace LKK
             {
                 case formTypes.INFERENCELKK:
                     formType = formTypes.INFERENCELKK;
+                    dataGridView1.DataSource = lkk.getLKK();
+                    dataGridView1.Columns[0].HeaderText = "Висновок ЛКК";
                     break;
                 case formTypes.DOCTORS:
                     formType = formTypes.DOCTORS;
@@ -76,7 +78,27 @@ namespace LKK
 
         private void insertButton_Click(object sender, EventArgs e)
         {
-            
+            addData dataAdd = new addData();
+            switch (formType)
+            {
+                case formTypes.DEPARTMENTS:                    
+                    dataAdd.setType(addData.formType.DEPARTMENTS, addData.formAction.ADD);                    
+                    break;
+                case formTypes.DIAGNOSE:
+                    dataAdd.setType(addData.formType.DIAGNOSE, addData.formAction.ADD);
+                    break;
+                case formTypes.DOCTORS:
+                    dataAdd.setType(addData.formType.DOCTORS, addData.formAction.ADD);
+                    break;
+                case formTypes.INFERENCELKK:
+                    dataAdd.setType(addData.formType.INFERENCELKK, addData.formAction.ADD);
+                    break;
+                case formTypes.REGIONS:
+                    dataAdd.setType(addData.formType.REGIONS, addData.formAction.ADD);
+                    break;
+
+            }
+            dataAdd.ShowDialog();
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

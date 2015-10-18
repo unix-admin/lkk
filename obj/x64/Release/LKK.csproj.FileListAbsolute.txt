@@ -1,0 +1,8 @@
+D:\profile\Documents\Visual Studio 2012\Projects\LKK\bin\x64\Release\LKK.exe.config
+D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\x64\Release\LKK.csprojResolveAssemblyReference.cache
+D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\x64\Release\LKK.addData.resources
+D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\x64\Release\LKK.Form1.resources
+D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\x64\Release\LKK.formData.resources
+D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\x64\Release\LKK.lkkMain.resources
+D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\x64\Release\LKK.Properties.Resources.resources
+D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\x64\Release\LKK.csproj.GenerateResource.Cache

@@ -57,28 +57,28 @@
             // 
             this.insertButton.Location = new System.Drawing.Point(220, 265);
             this.insertButton.Name = "insertButton";
-            this.insertButton.Size = new System.Drawing.Size(75, 23);
+            this.insertButton.Size = new System.Drawing.Size(118, 23);
             this.insertButton.TabIndex = 1;
-            this.insertButton.Text = "insertData";
+            this.insertButton.Text = "Додати дані";
             this.insertButton.UseVisualStyleBackColor = true;
             this.insertButton.Click += new System.EventHandler(this.insertButton_Click);
             // 
             // editButton
             // 
-            this.editButton.Location = new System.Drawing.Point(361, 265);
+            this.editButton.Location = new System.Drawing.Point(571, 265);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(75, 23);
+            this.editButton.Size = new System.Drawing.Size(118, 23);
             this.editButton.TabIndex = 2;
-            this.editButton.Text = "deleteData";
+            this.editButton.Text = "Видилити дані";
             this.editButton.UseVisualStyleBackColor = true;
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(508, 265);
+            this.deleteButton.Location = new System.Drawing.Point(402, 265);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.Size = new System.Drawing.Size(118, 23);
             this.deleteButton.TabIndex = 3;
-            this.deleteButton.Text = "modifyData";
+            this.deleteButton.Text = "Змінити дані";
             this.deleteButton.UseVisualStyleBackColor = true;
             // 
             // mainDs

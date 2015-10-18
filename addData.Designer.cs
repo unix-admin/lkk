@@ -47,8 +47,9 @@
             this.confirn.Name = "confirn";
             this.confirn.Size = new System.Drawing.Size(75, 23);
             this.confirn.TabIndex = 1;
-            this.confirn.Text = "button1";
+            this.confirn.Text = "ОК";
             this.confirn.UseVisualStyleBackColor = true;
+            this.confirn.Click += new System.EventHandler(this.confirn_Click);
             // 
             // cancel
             // 
@@ -56,7 +57,7 @@
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
             this.cancel.TabIndex = 2;
-            this.cancel.Text = "button2";
+            this.cancel.Text = "Отмена";
             this.cancel.UseVisualStyleBackColor = true;
             // 
             // nameValue
@@ -79,6 +80,7 @@
             this.Controls.Add(this.valueToEdit);
             this.Name = "addData";
             this.Text = "addData";
+            this.Load += new System.EventHandler(this.addData_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

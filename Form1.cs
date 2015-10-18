@@ -41,7 +41,7 @@ namespace LKK
         {
             formData data = new formData();
             data.setFormType(formData.formTypes.DOCTORS);
-            data.setFormActions(formData.formActions.ADD);
+            data.setFormActions(formData.formActions.VIEW);
             data.ShowDialog();
         }
 
@@ -49,7 +49,7 @@ namespace LKK
         {
             formData data = new formData();
             data.setFormType(formData.formTypes.REGIONS);
-            data.setFormActions(formData.formActions.ADD);
+            data.setFormActions(formData.formActions.VIEW);
             data.ShowDialog();
         }
 
@@ -57,7 +57,7 @@ namespace LKK
         {
             formData data = new formData();
             data.setFormType(formData.formTypes.DEPARTMENTS);
-            data.setFormActions(formData.formActions.ADD);
+            data.setFormActions(formData.formActions.VIEW);
             data.ShowDialog();
         }
 
@@ -65,7 +65,7 @@ namespace LKK
         {
             formData data = new formData();
             data.setFormType(formData.formTypes.DIAGNOSE);
-            data.setFormActions(formData.formActions.ADD);
+            data.setFormActions(formData.formActions.VIEW);
             data.ShowDialog();
         }
 
@@ -73,7 +73,7 @@ namespace LKK
         {
             formData data = new formData();
             data.setFormType(formData.formTypes.INFERENCELKK);
-            data.setFormActions(formData.formActions.ADD);
+            data.setFormActions(formData.formActions.VIEW);
             data.ShowDialog();
         }       
     }
