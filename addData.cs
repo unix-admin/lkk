@@ -42,9 +42,10 @@ namespace LKK
         {
             regionID = ID;
         }
-        private void setDataToUpdate(string data, string townType)
+        public void setDataToUpdate(string data, string townType)
         {
             dataToUpdate = data;
+            valueToEdit.Text = data;
             typeTownToUpdate = townType;
         }
         public void setType(formType formTypes, formAction formActions)
@@ -102,6 +103,7 @@ namespace LKK
                     {
                         case formType.DEPARTMENTS:
                             lkk.addData(Database.typesData.department, valueToEdit.Text);
+                            
                             break;
                         case formType.DIAGNOSE:
                             lkk.addData(Database.typesData.diagnose, valueToEdit.Text);
@@ -146,6 +148,12 @@ namespace LKK
                         break;
                     }
             }
+            Close();
+        }
+
+        private void cancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
     }

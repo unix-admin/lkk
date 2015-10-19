@@ -103,7 +103,7 @@ namespace LKK
             data.Fill(lkkData.Tables["departments"]);
             selectData.CommandText = "SELECT title FROM regions";
             data.Fill(lkkData.Tables["regions"]);
-            selectData.CommandText = "SELECT fio FROM doctors ORDER BY fio ASC";
+            selectData.CommandText = "SELECT fio FROM doctors";
             data.Fill(lkkData.Tables["doctors"]);
             lkkData.Tables["departments"].Rows.Add();
             lkkData.Tables["regions"].Rows.Add();
@@ -165,6 +165,32 @@ namespace LKK
            data.Fill(LKK);
            disconnect();
            return LKK;
+       }
+       public DataTable getDepartments()
+       {
+           DataTable departments = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT title FROM departments ";
+           data.SelectCommand = selectData;
+           connect();
+           data.Fill(departments);
+           disconnect();
+           return departments;
+       }
+       public DataTable getRegions()
+       {
+           DataTable regions = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT title FROM regions ";
+           data.SelectCommand = selectData;
+           connect();
+           data.Fill(regions);
+           disconnect();
+           return regions;
        }
        
        private SQLiteDataReader reader;
@@ -308,23 +334,23 @@ namespace LKK
            switch (typeData)
            {
                case typesData.department:
-                   updateSQLCommand.CommandText = "UPDATE departments SET title=:newValue WHERE title=oldValue";
+                   updateSQLCommand.CommandText = "UPDATE departments SET title=:newValue WHERE title=:oldValue";
                    break;
                case typesData.diagnose:
-                   updateSQLCommand.CommandText = "UPDATE diagnosis SET title=:newValue WHERE title=oldValue";
+                   updateSQLCommand.CommandText = "UPDATE diagnosis SET title=:newValue WHERE title=:oldValue";
                    break;
                case typesData.doctor:
-                   updateSQLCommand.CommandText = "UPDATE doctors SET fio=:newValue WHERE fio=oldValue";
+                   updateSQLCommand.CommandText = "UPDATE doctors SET fio=:newValue WHERE fio=:oldValue";
                    break;
                case typesData.lkk:
-                   updateSQLCommand.CommandText = "UPDATE infedenceLKK SET title=:newValue WHERE title=oldValue";
+                   updateSQLCommand.CommandText = "UPDATE infedenceLKK SET title=:newValue WHERE title=:oldValue";
                    break;
                case typesData.region:
-                   updateSQLCommand.CommandText = "UPDATE regions SET title=:newValue WHERE title=oldValue";
+                   updateSQLCommand.CommandText = "UPDATE regions SET title=:newValue WHERE title=:oldValue";
                    break;
            }
            updateSQLCommand.Parameters.Add(":oldValue", DbType.String);
-           updateSQLCommand.Parameters[":oldValue"].Value = newValue;
+           updateSQLCommand.Parameters[":oldValue"].Value = oldValue;
            updateSQLCommand.Parameters.Add(":newValue", DbType.String);
            updateSQLCommand.Parameters[":newValue"].Value = newValue;
            connect();

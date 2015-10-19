@@ -15,12 +15,11 @@ namespace LKK
         public lkkMain()
         {
             InitializeComponent();
-            DataSet data = lkkData.getData();
-            doctor.DataSource = data.Tables["doctors"];
+            doctor.DataSource = lkkData.getDoctors();
             doctor.DisplayMember = "fio";
-            region.DataSource = data.Tables["regions"];
+            region.DataSource = lkkData.getRegions();
             region.DisplayMember = "title";
-            department.DataSource = data.Tables["departments"];
+            department.DataSource = lkkData.getDepartments();
             department.DisplayMember = "title";
         }
 
@@ -54,7 +53,7 @@ namespace LKK
             lkkDataToInsert.msek = msek.Text;
             lkkDataToInsert.addition = additions.Text;
             lkkDataToInsert.sex = sex.Text;
-            lkkDataToInsert.status = "1";
+            lkkDataToInsert.status = Program.status;
             lkkData.insertData(lkkDataToInsert);
             string[] words = town.Text.Split('.');
             string a = words[0];
@@ -65,7 +64,10 @@ namespace LKK
         {
             addData doctorAdd = new addData();
             doctorAdd.setType(addData.formType.DOCTORS, addData.formAction.ADD);
-            doctorAdd.ShowDialog();   
+            doctorAdd.ShowDialog();
+            doctor.DataSource = lkkData.getDoctors();
+            doctor.DisplayMember = "fio";
+ 
          
         }
 

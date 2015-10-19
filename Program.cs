@@ -19,14 +19,11 @@ namespace LKK
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            status = "1";
             
         }
-        public static string work
-        {
-            get { return work; }
-            set { work = value; }
-        }
-
+        public static string status;
+   
     }
 
 }
