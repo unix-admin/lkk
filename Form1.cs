@@ -43,6 +43,8 @@ namespace LKK
             data.setFormType(formData.formTypes.DOCTORS);
             data.setFormActions(formData.formActions.VIEW);
             data.ShowDialog();
+            Program.work = "1";
+
         }
 
         private void regionsToolStripMenuItem_Click(object sender, EventArgs e)
