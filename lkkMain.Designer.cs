@@ -70,6 +70,12 @@
             this.addLkk = new System.Windows.Forms.Button();
             this.addDiagnose = new System.Windows.Forms.Button();
             this.print = new System.Windows.Forms.CheckBox();
+            this.invalidityDate = new System.Windows.Forms.DateTimePicker();
+            this.invalidityLabelText = new System.Windows.Forms.Label();
+            this.buttonAddLPZ = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.LPZ = new System.Windows.Forms.ComboBox();
+            this.invalidity = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -341,7 +347,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(37, 234);
+            this.label14.Location = new System.Drawing.Point(37, 266);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(47, 13);
             this.label14.TabIndex = 31;
@@ -349,24 +355,24 @@
             // 
             // diagnose
             // 
-            this.diagnose.Location = new System.Drawing.Point(93, 194);
+            this.diagnose.Location = new System.Drawing.Point(93, 224);
             this.diagnose.Name = "diagnose";
-            this.diagnose.Size = new System.Drawing.Size(458, 96);
+            this.diagnose.Size = new System.Drawing.Size(458, 85);
             this.diagnose.TabIndex = 32;
             this.diagnose.Text = "";
             // 
             // lkk
             // 
-            this.lkk.Location = new System.Drawing.Point(93, 296);
+            this.lkk.Location = new System.Drawing.Point(93, 319);
             this.lkk.Name = "lkk";
-            this.lkk.Size = new System.Drawing.Size(458, 96);
+            this.lkk.Size = new System.Drawing.Size(458, 85);
             this.lkk.TabIndex = 34;
             this.lkk.Text = "";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(7, 337);
+            this.label15.Location = new System.Drawing.Point(7, 357);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(81, 13);
             this.label15.TabIndex = 33;
@@ -374,16 +380,16 @@
             // 
             // msek
             // 
-            this.msek.Location = new System.Drawing.Point(93, 398);
+            this.msek.Location = new System.Drawing.Point(93, 413);
             this.msek.Name = "msek";
-            this.msek.Size = new System.Drawing.Size(458, 96);
+            this.msek.Size = new System.Drawing.Size(458, 85);
             this.msek.TabIndex = 36;
             this.msek.Text = "";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 439);
+            this.label16.Location = new System.Drawing.Point(7, 457);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(89, 13);
             this.label16.TabIndex = 35;
@@ -391,9 +397,9 @@
             // 
             // additions
             // 
-            this.additions.Location = new System.Drawing.Point(93, 500);
+            this.additions.Location = new System.Drawing.Point(93, 507);
             this.additions.Name = "additions";
-            this.additions.Size = new System.Drawing.Size(458, 96);
+            this.additions.Size = new System.Drawing.Size(458, 85);
             this.additions.TabIndex = 38;
             this.additions.Text = "";
             // 
@@ -418,7 +424,7 @@
             // 
             // addLkk
             // 
-            this.addLkk.Location = new System.Drawing.Point(557, 369);
+            this.addLkk.Location = new System.Drawing.Point(557, 380);
             this.addLkk.Name = "addLkk";
             this.addLkk.Size = new System.Drawing.Size(25, 23);
             this.addLkk.TabIndex = 41;
@@ -428,7 +434,7 @@
             // 
             // addDiagnose
             // 
-            this.addDiagnose.Location = new System.Drawing.Point(557, 267);
+            this.addDiagnose.Location = new System.Drawing.Point(557, 285);
             this.addDiagnose.Name = "addDiagnose";
             this.addDiagnose.Size = new System.Drawing.Size(25, 23);
             this.addDiagnose.TabIndex = 40;
@@ -448,11 +454,72 @@
             this.print.Text = "Друкувати";
             this.print.UseVisualStyleBackColor = true;
             // 
+            // invalidityDate
+            // 
+            this.invalidityDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.invalidityDate.Location = new System.Drawing.Point(219, 194);
+            this.invalidityDate.Name = "invalidityDate";
+            this.invalidityDate.Size = new System.Drawing.Size(103, 20);
+            this.invalidityDate.TabIndex = 43;
+            // 
+            // invalidityLabelText
+            // 
+            this.invalidityLabelText.AutoSize = true;
+            this.invalidityLabelText.Location = new System.Drawing.Point(108, 198);
+            this.invalidityLabelText.Name = "invalidityLabelText";
+            this.invalidityLabelText.Size = new System.Drawing.Size(107, 13);
+            this.invalidityLabelText.TabIndex = 44;
+            this.invalidityLabelText.Text = "Дата встановлення";
+            // 
+            // buttonAddLPZ
+            // 
+            this.buttonAddLPZ.Location = new System.Drawing.Point(557, 193);
+            this.buttonAddLPZ.Name = "buttonAddLPZ";
+            this.buttonAddLPZ.Size = new System.Drawing.Size(25, 23);
+            this.buttonAddLPZ.TabIndex = 47;
+            this.buttonAddLPZ.Text = "+";
+            this.buttonAddLPZ.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(331, 197);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(30, 13);
+            this.label19.TabIndex = 46;
+            this.label19.Text = "ЛПЗ";
+            // 
+            // LPZ
+            // 
+            this.LPZ.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.LPZ.FormattingEnabled = true;
+            this.LPZ.Location = new System.Drawing.Point(367, 194);
+            this.LPZ.Name = "LPZ";
+            this.LPZ.Size = new System.Drawing.Size(184, 21);
+            this.LPZ.Sorted = true;
+            this.LPZ.TabIndex = 45;
+            // 
+            // invalidity
+            // 
+            this.invalidity.AutoSize = true;
+            this.invalidity.Location = new System.Drawing.Point(14, 197);
+            this.invalidity.Name = "invalidity";
+            this.invalidity.Size = new System.Drawing.Size(86, 17);
+            this.invalidity.TabIndex = 48;
+            this.invalidity.Text = "Інвалідність";
+            this.invalidity.UseVisualStyleBackColor = true;
+            // 
             // lkkMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(601, 652);
+            this.Controls.Add(this.invalidity);
+            this.Controls.Add(this.buttonAddLPZ);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.LPZ);
+            this.Controls.Add(this.invalidityLabelText);
+            this.Controls.Add(this.invalidityDate);
             this.Controls.Add(this.print);
             this.Controls.Add(this.addLkk);
             this.Controls.Add(this.addDiagnose);
@@ -550,5 +617,11 @@
         private System.Windows.Forms.Button addLkk;
         private System.Windows.Forms.Button addDiagnose;
         private System.Windows.Forms.CheckBox print;
+        private System.Windows.Forms.DateTimePicker invalidityDate;
+        private System.Windows.Forms.Label invalidityLabelText;
+        private System.Windows.Forms.Button buttonAddLPZ;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ComboBox LPZ;
+        private System.Windows.Forms.CheckBox invalidity;
     }
 }

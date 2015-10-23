@@ -260,5 +260,35 @@ namespace LKK
                     break;
             }
         }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            DialogResult deleteQuestion = MessageBox.Show("Ви дійсно бажаєте видалити запис: "+dataGridView1.CurrentCell.Value.ToString(), "Видалення запису", MessageBoxButtons.YesNo);
+            if (deleteQuestion == DialogResult.Yes)
+            {
+                switch (formType)
+                {
+                    case formTypes.INFERENCELKK:
+                        lkk.deleteData(Database.typesData.lkk, "");
+                        this.Size = new Size(728, 372);
+                        break;
+                    case formTypes.DOCTORS:
+                        lkk.deleteData(Database.typesData.doctor, "1000");
+                        break;
+                    case formTypes.DEPARTMENTS:
+                        formType = formTypes.DEPARTMENTS;
+                        gridInit();
+                        break;
+                    case formTypes.REGIONS:
+                        formType = formTypes.REGIONS;
+                        gridInit();
+                        break;
+                    case formTypes.DIAGNOSE:
+                        formType = formTypes.DIAGNOSE;
+                        gridInit();
+                        break;
+                }
+            }
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace LKK
            ,DEPARTMENTS
            ,DIAGNOSE
            ,INFERENCELKK
-           ,INFERENCEMSEK
+           ,LPZ
         };
         public enum formAction
         {

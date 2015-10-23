@@ -45,6 +45,8 @@ namespace LKK
         private SQLiteCommand selectSQLCommand = new SQLiteCommand();
         private SQLiteCommand insertSQLCommand = new SQLiteCommand();
         private SQLiteCommand updateSQLCommand = new SQLiteCommand();
+        private SQLiteCommand deleteSQLCommand = new SQLiteCommand();
+
         public Database()
         {
             string dir = Directory.GetCurrentDirectory();
@@ -71,19 +73,20 @@ namespace LKK
             connect();
             SQLiteCommand create = new SQLiteCommand();
             create.Connection = connection;
-            create.CommandText = "CREATE TABLE doctors (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, fio VARCHAR (50));" +
-                                 "CREATE TABLE diagnosis (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, codeMKB VARCHAR(10), title  VARCHAR(100));" +
+            create.CommandText = "CREATE TABLE doctors (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, fio VARCHAR (50), deleted BOOLEAN DEFAULT false);" +
+                                 "CREATE TABLE diagnosis (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, codeMKB VARCHAR(10), title  VARCHAR(100), isOrphan BOOLEAN, deleted BOOLEAN DEFAULT false);" +
                                  "CREATE TABLE license (organsation  VARCHAR(100), department VARCHAR(100), lkk VARCHAR(100),serial VARCHAR(50));" +                                 
                                  "CREATE TABLE lkk (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, data DATE, number VARCHAR(20)," +
                                  " departmentID INTEGER, doctorID INTEGER, FIO VARCHAR(100), birth INTEGER, age INTEGER, regionID INTEGER," +
                                  " townID INTEGER, address VARCHAR(200), addressWork VARCHAR(200), position VARCHAR(200), mkbCode VARCHAR(20), diagnose VARCHAR(2000), " +
-                                 " lkk VARCHAR(2000), msek VARCHAR(2000), addition VARCHAR(2000), sex CHAR(2), status INTEGER);" +
-                                 "CREATE TABLE members (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, fio VARCHAR(100), active BOOLEAN, head BOOLEAN);" +
-                                 "CREATE TABLE departments(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title VARCHAR(50));" +
-                                 "CREATE TABLE regions (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title  VARCHAR(50));" +
-                                 "CREATE TABLE towns (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, type VARCHAR(5), town VARCHAR(100), regionID INTEGER);" +
-                                 "CREATE TABLE inferenceLKK (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title VARCHAR(1000));"+
-                                 "CREATE TABLE mkb (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, idDiagnose INTEGER, subCode INTEGER(10), title INTEGER(50));";
+                                 " lkk VARCHAR(2000), msek VARCHAR(2000), addition VARCHAR(2000), sex CHAR(2), status INTEGER, deleted BOOLEAN DEFAULT false);" +
+                                 "CREATE TABLE members (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, fio VARCHAR(100), active BOOLEAN, head BOOLEAN, deleted BOOLEAN DEFAULT false);" +
+                                 "CREATE TABLE departments(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title VARCHAR(50), deleted BOOLEAN DEFAULT false);" +
+                                 "CREATE TABLE regions (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title  VARCHAR(50), deleted BOOLEAN DEFAULT false);" +
+                                 "CREATE TABLE towns (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, type VARCHAR(5), town VARCHAR(100), regionID INTEGER, deleted BOOLEAN DEFAULT false);" +
+                                 "CREATE TABLE inferenceLKK (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title VARCHAR(1000), deleted BOOLEAN DEFAULT false);" +
+                                 "CREATE TABLE mkb (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, idDiagnose INTEGER, subCode INTEGER(10), title INTEGER(50), deleted BOOLEAN DEFAULT false);"+
+                                 "CREATE TABLE lpz (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title  VARCHAR(255), deleted BOOLEAN DEFAULT false);";
             create.ExecuteNonQuery();
             
             disconnect();
@@ -117,7 +120,7 @@ namespace LKK
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT towns.type || '.' ||towns.town AS town FROM towns WHERE towns.regionID=(SELECT id FROM regions WHERE regions.title=:regionName)";
+           selectData.CommandText = "SELECT towns.type || '.' ||towns.town AS town FROM towns WHERE towns.regionID=(SELECT id FROM regions WHERE regions.title=:regionName) AND towns.deleted='false'";
            selectData.Parameters.Add(":regionName", DbType.String);
            selectData.Parameters[":regionName"].Value = regionName;           
            data.SelectCommand = selectData;
@@ -132,7 +135,7 @@ namespace LKK
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT fio FROM doctors";
+           selectData.CommandText = "SELECT fio FROM doctors WHERE doctors.deleted='false'";
            data.SelectCommand = selectData;
            connect();
            data.Fill(doctors);
@@ -146,7 +149,7 @@ namespace LKK
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT codeMKB, title FROM diagnosis";
+           selectData.CommandText = "SELECT codeMKB, title FROM diagnosis WHERE codeMKB.deleted='false'";
            data.SelectCommand = selectData;
            connect();
            data.Fill(diagnose);
@@ -159,7 +162,7 @@ namespace LKK
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT title FROM inferenceLKK ";
+           selectData.CommandText = "SELECT title FROM inferenceLKK WHERE inferenceLKK.deleted='false'";
            data.SelectCommand = selectData;
            connect();
            data.Fill(LKK);
@@ -172,7 +175,7 @@ namespace LKK
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT title FROM departments ";
+           selectData.CommandText = "SELECT title FROM departments WHERE departments.deleted='false'";
            data.SelectCommand = selectData;
            connect();
            data.Fill(departments);
@@ -185,7 +188,7 @@ namespace LKK
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT title FROM regions ";
+           selectData.CommandText = "SELECT title FROM regions WHERE regions.deleted='false'";
            data.SelectCommand = selectData;
            connect();
            data.Fill(regions);
@@ -376,5 +379,106 @@ namespace LKK
            disconnect();
 
        }
+       public void deleteData(typesData typeData, string id) 
+       {
+           switch (typeData)
+           {
+               case typesData.department:
+                   updateSQLCommand.CommandText = "SELECT count() FROM departments WHERE id=:id";
+                   break;
+               case typesData.diagnose:
+                   updateSQLCommand.CommandText = "SELECT count() FROM diagnosis WHERE id=:id";
+                   break;
+               case typesData.doctor:
+                   updateSQLCommand.CommandText = "SELECT count() FROM doctors WHERE id=:id";
+                   break;
+               case typesData.lkk:
+                   updateSQLCommand.CommandText = "SELECT count() FROM lkk WHERE id=:id";
+                   break;
+               case typesData.region:
+                   updateSQLCommand.CommandText = "SELECT count() FROM regions WHERE id=:id";
+                   break;
+               case typesData.town:
+                   updateSQLCommand.CommandText = "SELECT count() FROM towns WHERE id=:id";
+                   break;
+           }
+           connect();
+           updateSQLCommand.Parameters.Add(":id", DbType.String);
+           updateSQLCommand.Parameters[":id"].Value = id;
+           reader = updateSQLCommand.ExecuteReader();
+           int count=1;
+           if (reader.Read())
+           {
+               count = Convert.ToInt32(reader[0].ToString());
+           }
+           reader.Close();
+           reader = null;
+           disconnect();
+           if (count > 0)
+               setDeleted(typeData, id);
+           else
+               realyDelete(typeData, id);
+
+       }
+
+        private void realyDelete(typesData typeData, string id)
+        {
+            switch (typeData)
+            {
+                case typesData.department:
+                   deleteSQLCommand.CommandText = "DELETE FROM departments WHERE id=:id";
+                    break;
+                case typesData.diagnose:
+                    deleteSQLCommand.CommandText = "DELETE FROM diagnosis WHERE id=:id";
+                    break;
+                case typesData.doctor:
+                    deleteSQLCommand.CommandText = "DELETE FROM doctors WHERE id=:id";
+                    break;
+                case typesData.lkk:
+                    deleteSQLCommand.CommandText = "DELETE FROM lkk WHERE id=:id";
+                    break;
+                case typesData.region:
+                    deleteSQLCommand.CommandText = "DELETE FROM regions WHERE id=:id";
+                    break;
+                case typesData.town:
+                    deleteSQLCommand.CommandText = "DELETE FROM towns WHERE id=:id";
+                    break;
+            }
+            connect();
+            deleteSQLCommand.Parameters.Add(":id", DbType.String);
+            deleteSQLCommand.Parameters[":id"].Value = id;
+            deleteSQLCommand.ExecuteNonQuery();
+            disconnect();
+        }
+
+        private void setDeleted(typesData typeData, string id)
+        {
+            switch (typeData)
+            {
+                case typesData.department:
+                    deleteSQLCommand.CommandText = "UPDATE departments SET deleted='true' WHERE id=:id";
+                    break;
+                case typesData.diagnose:
+                    deleteSQLCommand.CommandText = "UPDATE diagnosis SET deleted='true' WHERE id=:id";
+                    break;
+                case typesData.doctor:
+                    deleteSQLCommand.CommandText = "UPDATE doctors SET deleted='true' WHERE id=:id";
+                    break;
+                case typesData.lkk:
+                    deleteSQLCommand.CommandText = "UPDATE lkk SET deleted='true' WHERE id=:id";
+                    break;
+                case typesData.region:
+                    deleteSQLCommand.CommandText = "UPDATE regions SET deleted='true' WHERE id=:id";
+                    break;
+                case typesData.town:
+                    deleteSQLCommand.CommandText = "UPDATE towns SET deleted='true' WHERE id=:id";
+                    break;
+            }
+            connect();
+            deleteSQLCommand.Parameters.Add(":id", DbType.String);
+            deleteSQLCommand.Parameters[":id"].Value = id;
+            deleteSQLCommand.ExecuteNonQuery();
+            disconnect();
+        }
     }
 }

@@ -75,6 +75,12 @@ namespace LKK
             data.setFormType(formData.formTypes.INFERENCELKK);
             data.setFormActions(formData.formActions.VIEW);
             data.ShowDialog();
+        }
+
+        private void searchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            search lkkSearch = new search();
+            lkkSearch.Show();
         }       
     }
 }

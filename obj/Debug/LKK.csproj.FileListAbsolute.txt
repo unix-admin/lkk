@@ -37,3 +37,4 @@ D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.lkkMain.resou
 D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.Properties.Resources.resources
 D:\profile\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.csproj.GenerateResource.Cache
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.addData.resources
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.search.resources
