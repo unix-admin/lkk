@@ -3,7 +3,6 @@ C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.exe
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.pdb
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\bin\Debug\LKK.exe
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\bin\Debug\LKK.pdb
-C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\bin\Debug\System.Data.SQLite.pdb
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.csprojResolveAssemblyReference.cache
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.Form1.resources
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.lkkMain.resources
@@ -40,3 +39,6 @@ d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.exe
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.pdb
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.searchResult.resources
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.csprojResolveAssemblyReference.cache
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\bin\Debug\System.Data.SQLite.dll
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.Mode.resources
+C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.searchResult.resources

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/04/2015 08:32:30" ReportInfo.Modified="11/04/2015 09:58:07" ReportInfo.CreatorVersion="2013.1.4.0">
+  <Dictionary>
+    <TableDataSource Name="resultData" ReferenceName="resultData" DataType="System.Int32" Enabled="true">
+      <Column Name="id" DataType="System.Int64"/>
+      <Column Name="data" DataType="System.DateTime"/>
+      <Column Name="number" DataType="System.String"/>
+      <Column Name="department" DataType="System.String"/>
+      <Column Name="doctor" DataType="System.String"/>
+      <Column Name="FIO" DataType="System.String"/>
+      <Column Name="birth" DataType="System.Int64"/>
+      <Column Name="age" DataType="System.Int64"/>
+      <Column Name="region" DataType="System.String"/>
+      <Column Name="town" DataType="System.String"/>
+      <Column Name="address" DataType="System.String"/>
+      <Column Name="addressWork" DataType="System.String"/>
+      <Column Name="position" DataType="System.String"/>
+      <Column Name="mkbCode" DataType="System.String"/>
+      <Column Name="diagnose" DataType="System.String"/>
+      <Column Name="lkk" DataType="System.String"/>
+      <Column Name="msek" DataType="System.String"/>
+      <Column Name="addition" DataType="System.String"/>
+      <Column Name="sex" DataType="System.String"/>
+      <Column Name="haveInvalidity" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="invalidityDate" DataType="System.DateTime"/>
+      <Column Name="invalidityLpzID" DataType="System.Int64"/>
+      <Column Name="comission" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210">
+    <PageHeaderBand Name="PageHeader1" Width="1047.06" Height="56.7">
+      <TextObject Name="Text2" Width="47.25" Height="56.7" Border.Lines="All" Text="№ з/п&#13;&#10;" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text4" Left="47.25" Width="75.6" Height="56.7" Border.Lines="All" Text="Дата засідання" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="122.85" Width="94.5" Height="56.7" Border.Lines="All" Text="Відділення, лікуючий лікар" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="217.35" Width="132.3" Height="56.7" Border.Lines="All" Text="ПІБ" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="349.65" Width="94.5" Height="56.7" Border.Lines="All" Text="Рік народження. вік" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text12" Left="444.15" Width="94.5" Height="56.7" Border.Lines="All" Text="Адреса хворого" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text14" Left="538.65" Width="66.15" Height="56.7" Border.Lines="All" Text="Місце роботи" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text16" Left="604.8" Width="66.15" Height="56.7" Border.Lines="All" Text="Посада" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text18" Left="670.95" Width="103.95" Height="56.7" Border.Lines="All" Text="Діагноз" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text20" Left="774.9" Width="94.5" Height="56.7" Border.Lines="All" Text="Висновок спец ЛКК" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text22" Left="869.4" Width="94.5" Height="56.7" Border.Lines="All" Text="Висновок МСЕК" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text24" Left="963.9" Width="75.6" Height="56.7" Border.Lines="All" Text="Примітка" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="reportData" Top="60.7" Width="1047.06" Height="18.9" CanGrow="true" CanBreak="true" DataSource="resultData">
+      <TextObject Name="Text1" Width="47.25" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.id]" Font="Arial, 8pt"/>
+      <TextObject Name="Text3" Left="47.25" Width="75.6" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="Протокол № [resultData.number] від[resultData.data]" Format="Date" Format.Format="d" Font="Arial, 8pt"/>
+      <TextObject Name="Text5" Left="122.85" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.department]" Font="Arial, 8pt"/>
+      <TextObject Name="Text7" Left="217.35" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.FIO]" Font="Arial, 8pt"/>
+      <TextObject Name="Text9" Left="349.65" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.birth], [resultData.age]" Font="Arial, 8pt"/>
+      <TextObject Name="Text11" Left="444.15" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.region] район [resultData.town], [resultData.address]" Font="Arial, 8pt"/>
+      <TextObject Name="Text13" Left="538.65" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.addressWork]" Font="Arial, 8pt"/>
+      <TextObject Name="Text15" Left="604.8" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.position]" Font="Arial, 8pt"/>
+      <TextObject Name="Text17" Left="670.95" Width="103.95" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.diagnose]" Font="Arial, 8pt"/>
+      <TextObject Name="Text19" Left="774.9" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.lkk]" Font="Arial, 8pt"/>
+      <TextObject Name="Text21" Left="869.4" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.msek]" Font="Arial, 8pt"/>
+      <TextObject Name="Text23" Left="963.9" Width="75.6" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[resultData.addition]" Font="Arial, 8pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>
