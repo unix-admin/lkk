@@ -212,6 +212,8 @@
             this.yearBirth.Name = "yearBirth";
             this.yearBirth.Size = new System.Drawing.Size(49, 20);
             this.yearBirth.TabIndex = 15;
+            this.yearBirth.TextChanged += new System.EventHandler(this.yearBirth_TextChanged);
+            this.yearBirth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.yearBirth_KeyPress);
             // 
             // label7
             // 
@@ -228,6 +230,7 @@
             this.age.Name = "age";
             this.age.Size = new System.Drawing.Size(31, 20);
             this.age.TabIndex = 17;
+            this.age.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.age_KeyPress);
             // 
             // label8
             // 
@@ -456,6 +459,7 @@
             // 
             // invalidityDate
             // 
+            this.invalidityDate.Enabled = false;
             this.invalidityDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.invalidityDate.Location = new System.Drawing.Point(219, 194);
             this.invalidityDate.Name = "invalidityDate";
@@ -479,6 +483,7 @@
             this.buttonAddLPZ.TabIndex = 47;
             this.buttonAddLPZ.Text = "+";
             this.buttonAddLPZ.UseVisualStyleBackColor = true;
+            this.buttonAddLPZ.Click += new System.EventHandler(this.buttonAddLPZ_Click);
             // 
             // label19
             // 
@@ -508,6 +513,7 @@
             this.invalidity.TabIndex = 48;
             this.invalidity.Text = "Інвалідність";
             this.invalidity.UseVisualStyleBackColor = true;
+            this.invalidity.CheckedChanged += new System.EventHandler(this.invalidity_CheckedChanged);
             // 
             // lkkMain
             // 

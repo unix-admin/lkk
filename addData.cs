@@ -90,7 +90,9 @@ namespace LKK
                 case formType.REGIONS:
                     nameValue.Text = "Район";
                     break;
-
+                case formType.LPZ:
+                    nameValue.Text = "Лікувально-профілактичний заклад";
+                    break;
             }
         }
 
@@ -102,8 +104,7 @@ namespace LKK
                     switch (type)
                     {
                         case formType.DEPARTMENTS:
-                            lkk.addData(Database.typesData.department, valueToEdit.Text);
-                            
+                            lkk.addData(Database.typesData.department, valueToEdit.Text);                            
                             break;
                         case formType.DIAGNOSE:
                             lkk.addData(Database.typesData.diagnose, valueToEdit.Text);
@@ -119,6 +120,9 @@ namespace LKK
                             break;
                         case formType.TOWNS:
                             lkk.addTown(townTypes.Text,regionID,valueToEdit.Text);
+                            break;
+                        case formType.LPZ:
+                            lkk.addData(Database.typesData.lpz, valueToEdit.Text);
                             break;
                     }
                     break;

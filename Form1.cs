@@ -15,6 +15,8 @@ namespace LKK
         public Form1()
         {
             InitializeComponent();
+            workMode.Text = "Режим роботи: Робота з протоколами ЛКК";
+            Program.status = 1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -81,6 +83,34 @@ namespace LKK
         {
             search lkkSearch = new search();
             lkkSearch.Show();
-        }       
+        }
+
+        private void changeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Mode setMode = new Mode();
+            setMode.ShowDialog();
+            changeModeText();
+
+        }
+        private void changeModeText()
+        {
+            if (Program.status == 0)
+            {
+                workMode.Text = "Режим роботи: Робота з призначенням інсуліну";
+            }
+            else 
+            {
+                workMode.Text = "Режим роботи: Робота з протоколами ЛКК";
+            }
+
+        }
+
+        private void membersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formData members = new formData();
+            members.setFormType(formData.formTypes.MEMBERSLKK);
+            members.setFormActions(formData.formActions.VIEW);
+            members.ShowDialog();
+        }
     }
 }

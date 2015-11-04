@@ -30,6 +30,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.workMode = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.workToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +51,7 @@
             this.recreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutSoftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,11 +67,20 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.workMode});
             this.statusStrip1.Location = new System.Drawing.Point(0, 239);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(284, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // workMode
+            // 
+            this.workMode.Image = global::LKK.Properties.Resources.Documents3422334;
+            this.workMode.Name = "workMode";
+            this.workMode.Size = new System.Drawing.Size(104, 17);
+            this.workMode.Text = "Режим роботи";
             // 
             // menuStrip1
             // 
@@ -91,35 +102,36 @@
             this.searchToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.workToolStripMenuItem.Name = "workToolStripMenuItem";
-            this.workToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.workToolStripMenuItem.Text = "work";
+            this.workToolStripMenuItem.Size = new System.Drawing.Size(134, 20);
+            this.workToolStripMenuItem.Text = "Робота з програмою";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newToolStripMenuItem.Text = "new";
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.newToolStripMenuItem.Text = "Новий";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // changeToolStripMenuItem
             // 
             this.changeToolStripMenuItem.Name = "changeToolStripMenuItem";
-            this.changeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.changeToolStripMenuItem.Text = "change";
+            this.changeToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.changeToolStripMenuItem.Text = "Режим роботи";
+            this.changeToolStripMenuItem.Click += new System.EventHandler(this.changeToolStripMenuItem_Click);
             // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.searchToolStripMenuItem.Text = "search";
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.searchToolStripMenuItem.Text = "Пошук";
             this.searchToolStripMenuItem.Click += new System.EventHandler(this.searchToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "exit";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.exitToolStripMenuItem.Text = "Вихід";
             // 
             // databaseToolStripMenuItem
             // 
@@ -133,54 +145,56 @@
             this.inferenceToolStripMenuItem,
             this.administerToolStripMenuItem});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.databaseToolStripMenuItem.Text = "database";
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.databaseToolStripMenuItem.Text = "База даних";
             // 
             // doctrosToolStripMenuItem
             // 
             this.doctrosToolStripMenuItem.Name = "doctrosToolStripMenuItem";
-            this.doctrosToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.doctrosToolStripMenuItem.Text = "doctros";
+            this.doctrosToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.doctrosToolStripMenuItem.Text = "Лікарі";
             this.doctrosToolStripMenuItem.Click += new System.EventHandler(this.doctrosToolStripMenuItem_Click);
             // 
             // regionsToolStripMenuItem
             // 
             this.regionsToolStripMenuItem.Name = "regionsToolStripMenuItem";
-            this.regionsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.regionsToolStripMenuItem.Text = "regions";
+            this.regionsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.regionsToolStripMenuItem.Text = "Райони";
             this.regionsToolStripMenuItem.Click += new System.EventHandler(this.regionsToolStripMenuItem_Click);
             // 
             // townsToolStripMenuItem
             // 
             this.townsToolStripMenuItem.Name = "townsToolStripMenuItem";
-            this.townsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.townsToolStripMenuItem.Text = "towns";
+            this.townsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.townsToolStripMenuItem.Text = "Міста";
+            this.townsToolStripMenuItem.Visible = false;
             // 
             // departmentsToolStripMenuItem
             // 
             this.departmentsToolStripMenuItem.Name = "departmentsToolStripMenuItem";
-            this.departmentsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.departmentsToolStripMenuItem.Text = "departments";
+            this.departmentsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.departmentsToolStripMenuItem.Text = "Відділення";
             this.departmentsToolStripMenuItem.Click += new System.EventHandler(this.departmentsToolStripMenuItem_Click);
             // 
             // membersToolStripMenuItem
             // 
             this.membersToolStripMenuItem.Name = "membersToolStripMenuItem";
-            this.membersToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.membersToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.membersToolStripMenuItem.Text = "members";
+            this.membersToolStripMenuItem.Click += new System.EventHandler(this.membersToolStripMenuItem_Click);
             // 
             // diagnosesToolStripMenuItem
             // 
             this.diagnosesToolStripMenuItem.Name = "diagnosesToolStripMenuItem";
-            this.diagnosesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.diagnosesToolStripMenuItem.Text = "diagnoses";
+            this.diagnosesToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.diagnosesToolStripMenuItem.Text = "Діагнози";
             this.diagnosesToolStripMenuItem.Click += new System.EventHandler(this.diagnosesToolStripMenuItem_Click);
             // 
             // inferenceToolStripMenuItem
             // 
             this.inferenceToolStripMenuItem.Name = "inferenceToolStripMenuItem";
-            this.inferenceToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.inferenceToolStripMenuItem.Text = "inference";
+            this.inferenceToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.inferenceToolStripMenuItem.Text = "Висновки ЛКК";
             this.inferenceToolStripMenuItem.Click += new System.EventHandler(this.inferenceToolStripMenuItem_Click);
             // 
             // administerToolStripMenuItem
@@ -190,26 +204,26 @@
             this.restoreToolStripMenuItem,
             this.recreateToolStripMenuItem});
             this.administerToolStripMenuItem.Name = "administerToolStripMenuItem";
-            this.administerToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.administerToolStripMenuItem.Text = "administer";
+            this.administerToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.administerToolStripMenuItem.Text = "Адміністрування";
             // 
             // backupToolStripMenuItem
             // 
             this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
-            this.backupToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.backupToolStripMenuItem.Text = "backup";
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.backupToolStripMenuItem.Text = "Резервна копія";
             // 
             // restoreToolStripMenuItem
             // 
             this.restoreToolStripMenuItem.Name = "restoreToolStripMenuItem";
-            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.restoreToolStripMenuItem.Text = "restore";
+            this.restoreToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.restoreToolStripMenuItem.Text = "Відновлення з резервної копії";
             // 
             // recreateToolStripMenuItem
             // 
             this.recreateToolStripMenuItem.Name = "recreateToolStripMenuItem";
-            this.recreateToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.recreateToolStripMenuItem.Text = "recreate";
+            this.recreateToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.recreateToolStripMenuItem.Text = "Створити нову базу даних";
             this.recreateToolStripMenuItem.Click += new System.EventHandler(this.recreateToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
@@ -239,6 +253,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -270,6 +286,7 @@
         private System.Windows.Forms.ToolStripMenuItem restoreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutSoftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recreateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel workMode;
     }
 }
 

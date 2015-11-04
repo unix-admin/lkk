@@ -30,23 +30,23 @@
         {
             this.startLKKdate = new System.Windows.Forms.DateTimePicker();
             this.endLKKDate = new System.Windows.Forms.DateTimePicker();
-            this.lkkDate = new System.Windows.Forms.CheckBox();
             this.Surname = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.surnameText = new System.Windows.Forms.TextBox();
             this.age = new System.Windows.Forms.CheckBox();
             this.ageStart = new System.Windows.Forms.NumericUpDown();
             this.ageEnd = new System.Windows.Forms.NumericUpDown();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.regionBox = new System.Windows.Forms.ComboBox();
             this.region = new System.Windows.Forms.CheckBox();
             this.diagnose = new System.Windows.Forms.CheckBox();
-            this.diagnoseText = new System.Windows.Forms.ComboBox();
+            this.diagnoseBox = new System.Windows.Forms.ComboBox();
             this.manWoman = new System.Windows.Forms.CheckBox();
             this.orphanDiseases = new System.Windows.Forms.CheckBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.lpzBox = new System.Windows.Forms.ComboBox();
             this.checkLPZ = new System.Windows.Forms.CheckBox();
             this.startSearch = new System.Windows.Forms.Button();
             this.betweenLKK = new System.Windows.Forms.Label();
             this.betweenAge = new System.Windows.Forms.Label();
+            this.lkkDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ageStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ageEnd)).BeginInit();
             this.SuspendLayout();
@@ -67,16 +67,6 @@
             this.endLKKDate.Size = new System.Drawing.Size(94, 20);
             this.endLKKDate.TabIndex = 1;
             // 
-            // lkkDate
-            // 
-            this.lkkDate.AutoSize = true;
-            this.lkkDate.Location = new System.Drawing.Point(13, 14);
-            this.lkkDate.Name = "lkkDate";
-            this.lkkDate.Size = new System.Drawing.Size(157, 17);
-            this.lkkDate.TabIndex = 2;
-            this.lkkDate.Text = "Дата засідання ЛКК      з:";
-            this.lkkDate.UseVisualStyleBackColor = true;
-            // 
             // Surname
             // 
             this.Surname.AutoSize = true;
@@ -86,13 +76,15 @@
             this.Surname.TabIndex = 3;
             this.Surname.Text = "ПІБ";
             this.Surname.UseVisualStyleBackColor = true;
+            this.Surname.CheckedChanged += new System.EventHandler(this.Surname_CheckedChanged);
             // 
-            // textBox1
+            // surnameText
             // 
-            this.textBox1.Location = new System.Drawing.Point(115, 52);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(263, 20);
-            this.textBox1.TabIndex = 4;
+            this.surnameText.Enabled = false;
+            this.surnameText.Location = new System.Drawing.Point(115, 52);
+            this.surnameText.Name = "surnameText";
+            this.surnameText.Size = new System.Drawing.Size(263, 20);
+            this.surnameText.TabIndex = 4;
             // 
             // age
             // 
@@ -103,9 +95,11 @@
             this.age.TabIndex = 5;
             this.age.Text = "Вік";
             this.age.UseVisualStyleBackColor = true;
+            this.age.CheckedChanged += new System.EventHandler(this.age_CheckedChanged);
             // 
             // ageStart
             // 
+            this.ageStart.Enabled = false;
             this.ageStart.Location = new System.Drawing.Point(73, 88);
             this.ageStart.Maximum = new decimal(new int[] {
             150,
@@ -118,6 +112,7 @@
             // 
             // ageEnd
             // 
+            this.ageEnd.Enabled = false;
             this.ageEnd.Location = new System.Drawing.Point(199, 89);
             this.ageEnd.Maximum = new decimal(new int[] {
             150,
@@ -128,13 +123,14 @@
             this.ageEnd.Size = new System.Drawing.Size(92, 20);
             this.ageEnd.TabIndex = 7;
             // 
-            // comboBox1
+            // regionBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(73, 127);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(218, 21);
-            this.comboBox1.TabIndex = 8;
+            this.regionBox.Enabled = false;
+            this.regionBox.FormattingEnabled = true;
+            this.regionBox.Location = new System.Drawing.Point(73, 127);
+            this.regionBox.Name = "regionBox";
+            this.regionBox.Size = new System.Drawing.Size(218, 21);
+            this.regionBox.TabIndex = 8;
             // 
             // region
             // 
@@ -145,6 +141,7 @@
             this.region.TabIndex = 9;
             this.region.Text = "Район";
             this.region.UseVisualStyleBackColor = true;
+            this.region.CheckedChanged += new System.EventHandler(this.region_CheckedChanged);
             // 
             // diagnose
             // 
@@ -155,42 +152,45 @@
             this.diagnose.TabIndex = 10;
             this.diagnose.Text = "Діагноз";
             this.diagnose.UseVisualStyleBackColor = true;
+            this.diagnose.CheckedChanged += new System.EventHandler(this.diagnose_CheckedChanged);
             // 
-            // diagnoseText
+            // diagnoseBox
             // 
-            this.diagnoseText.FormattingEnabled = true;
-            this.diagnoseText.Location = new System.Drawing.Point(98, 165);
-            this.diagnoseText.Name = "diagnoseText";
-            this.diagnoseText.Size = new System.Drawing.Size(280, 21);
-            this.diagnoseText.TabIndex = 11;
+            this.diagnoseBox.Enabled = false;
+            this.diagnoseBox.FormattingEnabled = true;
+            this.diagnoseBox.Location = new System.Drawing.Point(98, 165);
+            this.diagnoseBox.Name = "diagnoseBox";
+            this.diagnoseBox.Size = new System.Drawing.Size(280, 21);
+            this.diagnoseBox.TabIndex = 11;
             // 
             // manWoman
             // 
             this.manWoman.AutoSize = true;
-            this.manWoman.Location = new System.Drawing.Point(12, 246);
+            this.manWoman.Location = new System.Drawing.Point(12, 243);
             this.manWoman.Name = "manWoman";
-            this.manWoman.Size = new System.Drawing.Size(112, 17);
+            this.manWoman.Size = new System.Drawing.Size(334, 17);
             this.manWoman.TabIndex = 12;
-            this.manWoman.Text = "%чоловіків/жінок";
+            this.manWoman.Text = "Виключити осіб яким на даний домент виповнилося 18 років";
             this.manWoman.UseVisualStyleBackColor = true;
             // 
             // orphanDiseases
             // 
             this.orphanDiseases.AutoSize = true;
-            this.orphanDiseases.Location = new System.Drawing.Point(130, 246);
+            this.orphanDiseases.Location = new System.Drawing.Point(12, 275);
             this.orphanDiseases.Name = "orphanDiseases";
             this.orphanDiseases.Size = new System.Drawing.Size(144, 17);
             this.orphanDiseases.TabIndex = 13;
             this.orphanDiseases.Text = "Орфанні захворювання";
             this.orphanDiseases.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // lpzBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(98, 204);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(280, 21);
-            this.comboBox2.TabIndex = 15;
+            this.lpzBox.Enabled = false;
+            this.lpzBox.FormattingEnabled = true;
+            this.lpzBox.Location = new System.Drawing.Point(98, 204);
+            this.lpzBox.Name = "lpzBox";
+            this.lpzBox.Size = new System.Drawing.Size(280, 21);
+            this.lpzBox.TabIndex = 15;
             // 
             // checkLPZ
             // 
@@ -201,6 +201,7 @@
             this.checkLPZ.TabIndex = 14;
             this.checkLPZ.Text = "ЛПЗ";
             this.checkLPZ.UseVisualStyleBackColor = true;
+            this.checkLPZ.CheckedChanged += new System.EventHandler(this.checkLPZ_CheckedChanged);
             // 
             // startSearch
             // 
@@ -210,6 +211,7 @@
             this.startSearch.TabIndex = 16;
             this.startSearch.Text = "Пошук......";
             this.startSearch.UseVisualStyleBackColor = true;
+            this.startSearch.Click += new System.EventHandler(this.startSearch_Click);
             // 
             // betweenLKK
             // 
@@ -229,28 +231,37 @@
             this.betweenAge.TabIndex = 18;
             this.betweenAge.Text = "до";
             // 
+            // lkkDate
+            // 
+            this.lkkDate.AutoSize = true;
+            this.lkkDate.Location = new System.Drawing.Point(14, 15);
+            this.lkkDate.Name = "lkkDate";
+            this.lkkDate.Size = new System.Drawing.Size(156, 13);
+            this.lkkDate.TabIndex = 19;
+            this.lkkDate.Text = "Дата засідання ЛКК            з:";
+            // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(405, 306);
+            this.Controls.Add(this.lkkDate);
             this.Controls.Add(this.betweenAge);
             this.Controls.Add(this.betweenLKK);
             this.Controls.Add(this.startSearch);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.lpzBox);
             this.Controls.Add(this.checkLPZ);
             this.Controls.Add(this.orphanDiseases);
             this.Controls.Add(this.manWoman);
-            this.Controls.Add(this.diagnoseText);
+            this.Controls.Add(this.diagnoseBox);
             this.Controls.Add(this.diagnose);
             this.Controls.Add(this.region);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.regionBox);
             this.Controls.Add(this.ageEnd);
             this.Controls.Add(this.ageStart);
             this.Controls.Add(this.age);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.surnameText);
             this.Controls.Add(this.Surname);
-            this.Controls.Add(this.lkkDate);
             this.Controls.Add(this.endLKKDate);
             this.Controls.Add(this.startLKKdate);
             this.Name = "search";
@@ -266,22 +277,22 @@
 
         private System.Windows.Forms.DateTimePicker startLKKdate;
         private System.Windows.Forms.DateTimePicker endLKKDate;
-        private System.Windows.Forms.CheckBox lkkDate;
         private System.Windows.Forms.CheckBox Surname;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox surnameText;
         private System.Windows.Forms.CheckBox age;
         private System.Windows.Forms.NumericUpDown ageStart;
         private System.Windows.Forms.NumericUpDown ageEnd;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox regionBox;
         private System.Windows.Forms.CheckBox region;
         private System.Windows.Forms.CheckBox diagnose;
-        private System.Windows.Forms.ComboBox diagnoseText;
+        private System.Windows.Forms.ComboBox diagnoseBox;
         private System.Windows.Forms.CheckBox manWoman;
         private System.Windows.Forms.CheckBox orphanDiseases;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox lpzBox;
         private System.Windows.Forms.CheckBox checkLPZ;
         private System.Windows.Forms.Button startSearch;
         private System.Windows.Forms.Label betweenLKK;
         private System.Windows.Forms.Label betweenAge;
+        private System.Windows.Forms.Label lkkDate;
     }
 }

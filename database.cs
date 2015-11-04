@@ -7,8 +7,11 @@ using System.Data.SQLite;
 
 namespace LKK
 {
+  
     class Database
     {
+       
+
         public struct lkkData
         {
             
@@ -24,23 +27,35 @@ namespace LKK
             public string address;
             public string addressWork;
             public string position;
-          //  public string mkbCode;
+            public string mkbCode;
             public string diagnose;
             public string lkk;
             public string msek;
             public string addition;
             public string sex;
             public string status;
+            public bool haveInvalidity;
+            public string InvalidityDate;
+            public string InvalidityLPZ;
         };
+
+     
         public enum typesData
         {
             department = 0
-           ,doctor
-           ,region
-           ,town
-           ,diagnose
-           ,lkk
-        }
+           ,
+            doctor
+                ,
+            region
+                ,
+            town
+                ,
+            diagnose
+                ,
+            lkk
+                , lpz
+        };
+
         private SQLiteConnection connection;
         private SQLiteCommand selectSQLCommand = new SQLiteCommand();
         private SQLiteCommand insertSQLCommand = new SQLiteCommand();
@@ -143,13 +158,58 @@ namespace LKK
            return doctors;
        }
 
+       public DataTable getMembersLkk()
+       {
+           DataTable members = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();           
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT id,fio,head FROM members WHERE members.active=1 ORDER BY members.head DESC";
+           connect();          
+           data.SelectCommand = selectData;           
+           data.Fill(members);
+           disconnect();
+           return members;
+       }
+
+       private string getMembersLkkToInsert()
+       {
+           string members = null;
+           DataTable membersLkk = getMembersLkk();
+           
+           for (int i = 0; i < membersLkk.Rows.Count; i++)
+           {
+               if (i == membersLkk.Rows.Count - 1)
+                   members += membersLkk.Rows[i][0];
+               else
+                   members += membersLkk.Rows[i][0] + ",";
+           }
+           return members;
+       }
+
+       public DataTable getMemberLkkById(string id)
+       {
+           DataTable members = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();           
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT fio,head FROM members WHERE members.active=1 AND members.id=:id";
+           selectData.Parameters.Add(":id", DbType.String);
+           selectData.Parameters[":id"].Value = id;
+           connect();
+           data.SelectCommand = selectData;
+           data.Fill(members);
+           disconnect();
+           return members;
+       }
+
        public DataTable getDiagnose()
        {
            DataTable diagnose = new DataTable();
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT codeMKB, title FROM diagnosis WHERE codeMKB.deleted='false'";
+           selectData.CommandText = "SELECT codeMKB, title AS diagnose FROM diagnosis WHERE deleted='false'";
            data.SelectCommand = selectData;
            connect();
            data.Fill(diagnose);
@@ -182,6 +242,21 @@ namespace LKK
            disconnect();
            return departments;
        }
+
+       public DataTable getLPZ()
+       {
+           DataTable lpz = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT title FROM lpz WHERE lpz.deleted='false'";
+           data.SelectCommand = selectData;
+           connect();
+           data.Fill(lpz);
+           disconnect();
+           return lpz;
+       }
+
        public DataTable getRegions()
        {
            DataTable regions = new DataTable();
@@ -211,6 +286,12 @@ namespace LKK
                    break;
                case typesData.region:
                    selectSQLCommand.CommandText = "SELECT id FROM regions WHERE title=:parameter";
+                   break;
+               case typesData.lpz:
+                   selectSQLCommand.CommandText = "SELECT id FROM lpz WHERE title=:parameter";
+                   break;
+               case typesData.diagnose:
+                   selectSQLCommand.CommandText = "SELECT codeMKB FROM diagnosis WHERE title=:parameter";
                    break;
            }
            selectSQLCommand.Parameters.Add(":parameter", DbType.String);
@@ -247,12 +328,12 @@ namespace LKK
            return ID;
        }
 
-       public void insertData(lkkData data)
+       public string insertData(lkkData data)
        {
            insertSQLCommand.CommandText = "INSERT INTO LKK (data,number,departmentID,doctorID,FIO,birth,age,regionID,townID," +
-               "address,addressWork,position,diagnose,lkk,msek,addition,sex,status) VALUES(:data,:number,:departmentID," +
-               ":doctorID,:FIO,:birth,:age,:regionID,:townID,:address,:addressWork,:position,:diagnose,:lkk,:msek,"+
-               ":addition,:sex,:status)";
+               "address,addressWork,position,mkbCode,diagnose,lkk,msek,addition,sex,status,invalidityDate,invalidityLpzID,haveInvalidity,comission) VALUES(:data,:number,:departmentID," +
+               ":doctorID,:FIO,:birth,:age,:regionID,:townID,:address,:addressWork,:position,:mkbCode,:diagnose,:lkk,:msek," +
+               ":addition,:sex,:status,:invalidityDate,:invalidityLpzID,:haveInvalidity,:comission)";
            insertSQLCommand.Parameters.Add(":data", DbType.String);
            insertSQLCommand.Parameters[":data"].Value = data.date;
            insertSQLCommand.Parameters.Add(":number", DbType.String);
@@ -277,6 +358,8 @@ namespace LKK
            insertSQLCommand.Parameters[":addressWork"].Value = data.addressWork;
            insertSQLCommand.Parameters.Add(":position", DbType.String);
            insertSQLCommand.Parameters[":position"].Value = data.position;
+           insertSQLCommand.Parameters.Add(":mkbCode", DbType.String);
+           insertSQLCommand.Parameters[":mkbCode"].Value = data.mkbCode;
            insertSQLCommand.Parameters.Add(":diagnose", DbType.String);
            insertSQLCommand.Parameters[":diagnose"].Value = data.diagnose;
            insertSQLCommand.Parameters.Add(":lkk", DbType.String);
@@ -289,9 +372,47 @@ namespace LKK
            insertSQLCommand.Parameters[":sex"].Value = data.sex;
            insertSQLCommand.Parameters.Add(":status", DbType.String);
            insertSQLCommand.Parameters[":status"].Value = data.status;
+           insertSQLCommand.Parameters.Add(":haveInvalidity", DbType.Boolean);
+           insertSQLCommand.Parameters[":haveInvalidity"].Value = data.haveInvalidity;
+           if (data.haveInvalidity)
+           {
+               insertSQLCommand.Parameters.Add(":invalidityDate", DbType.String);
+               insertSQLCommand.Parameters[":invalidityDate"].Value = data.InvalidityDate;
+               insertSQLCommand.Parameters.Add(":invalidityLpzID", DbType.String);
+               insertSQLCommand.Parameters[":invalidityLpzID"].Value = getID(data.InvalidityLPZ, typesData.lpz);               
+           }
+           else 
+           {
+               insertSQLCommand.Parameters.Add(":invalidityDate", DbType.String);
+               insertSQLCommand.Parameters[":invalidityDate"].Value = null;
+               insertSQLCommand.Parameters.Add(":invalidityLpzID", DbType.String);
+               insertSQLCommand.Parameters[":invalidityLpzID"].Value = null;               
+           }
+           insertSQLCommand.Parameters.Add(":comission", DbType.String);
+           insertSQLCommand.Parameters[":comission"].Value = getMembersLkkToInsert();
+           
            connect();
            insertSQLCommand.ExecuteNonQuery();
+       //    insertSQLCommand.Transaction.Commit();
            disconnect();
+           
+           string id = null;
+           SQLiteCommand selectData = new SQLiteCommand();
+           selectData.Connection = connection;
+           connect();
+           selectData.CommandText = "SELECT id FROM lkk WHERE data=:date AND number=:number AND fio=:fio";
+           selectData.Parameters.Add(":date", DbType.String);
+           selectData.Parameters[":date"].Value = data.date;
+           selectData.Parameters.Add(":number", DbType.String);
+           selectData.Parameters[":number"].Value = data.number;
+           selectData.Parameters.Add(":fio", DbType.String);
+           selectData.Parameters[":fio"].Value = data.fio;
+           SQLiteDataReader getlkkID;
+           getlkkID = selectData.ExecuteReader();
+           if (getlkkID.Read())
+               id = getlkkID[0].ToString();
+           disconnect();
+           return id;
        }
        public void addData(typesData typeData, string value)
        {
@@ -311,6 +432,9 @@ namespace LKK
                    break;
                case typesData.region:
                    insertSQLCommand.CommandText = "INSERT INTO regions (title) VALUES(:value)";           
+                   break;
+               case typesData.lpz:
+                   insertSQLCommand.CommandText = "INSERT INTO lpz (title) VALUES(:value)";
                    break;
            }
            insertSQLCommand.Parameters.Add(":value", DbType.String);
@@ -479,6 +603,98 @@ namespace LKK
             deleteSQLCommand.Parameters[":id"].Value = id;
             deleteSQLCommand.ExecuteNonQuery();
             disconnect();
+        }
+        public DataSet getInfedenceLKK(string id)
+        {
+            DataSet infedence = new DataSet();
+            SQLiteDataAdapter data = new SQLiteDataAdapter();
+            
+            infedence.Tables.Add("infedence");
+            infedence.Tables.Add("head");
+            infedence.Tables.Add("members");
+            SQLiteCommand selectData = new SQLiteCommand();                        
+            selectData.Connection = connection;
+            selectData.CommandText = "SELECT * FROM infedenceView WHERE id=:id";           
+            selectData.Parameters.Add(":id", DbType.String);
+            selectData.Parameters[":id"].Value = id;
+            data.SelectCommand = selectData;
+            connect();
+            data.Fill(infedence.Tables["infedence"]);
+            data.SelectCommand = selectData;
+            string[] comission = infedence.Tables["infedence"].Rows[0]["comission"].ToString().Split(',');
+            string headLkk = comission[0];
+            string membersLKK = null;
+            for (int i = 1; i < comission.Length; i++)
+            {
+                if (i == comission.Length - 1)
+                {
+                    membersLKK += comission[i];
+                }
+                else 
+                {
+                    membersLKK += comission[i] + ",";
+                }
+            }            
+            selectData.CommandText = "SELECT fio FROM members WHERE id IN (" + headLkk + ")";           
+            data.Fill(infedence.Tables["head"]);
+            selectData.CommandText = "SELECT fio FROM members WHERE id IN (" + membersLKK + ")";
+            data.Fill(infedence.Tables["members"]);
+            disconnect();
+            return infedence;
+        }
+
+        public DataTable search(lkkSearchData data)
+        {
+            DataTable searchResult = new DataTable();
+            SQLiteCommand selectData = new SQLiteCommand();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter();
+            adapter.SelectCommand = selectData;
+            selectData.Connection = connection;
+            selectData.CommandText = "SELECT * FROM infedenceView WHERE data BETWEEN :dataStart AND :dataEnd ";
+            selectData.Parameters.Add(":dataStart", DbType.String);
+            selectData.Parameters.Add(":dataEnd", DbType.String);
+            selectData.Parameters[":dataStart"].Value = data.dateBegin;
+            selectData.Parameters[":dataEnd"].Value = data.dateEnd;            
+            if (data.fio != null)
+            {
+                selectData.CommandText += "AND fio=:fio ";                
+                selectData.Parameters.Add(":fio", DbType.String);
+                selectData.Parameters[":fio"].Value = data.fio;
+            }
+            if (data.ageStart != null)
+            {
+                selectData.CommandText += "AND age>=:ageStart AND age <=:endAge ";
+                selectData.Parameters.Add(":startAge", DbType.String);
+                selectData.Parameters.Add(":endAge", DbType.String);
+                selectData.Parameters[":startAge"].Value = data.ageStart;
+                selectData.Parameters[":endAge"].Value = data.ageEnd; 
+            }
+            if (data.region != null)
+            {
+                selectData.CommandText += "AND region=:region ";
+                selectData.Parameters.Add(":region", DbType.String);
+                selectData.Parameters[":region"].Value = data.region;
+            }
+            if (data.diagnose != null)
+            {
+                selectData.CommandText += "AND mkbCode=:mkbCode ";
+                selectData.Parameters.Add(":mkbCode", DbType.String);
+                selectData.Parameters[":mkbCode"].Value = getID(data.diagnose, typesData.diagnose);
+            }
+            if (data.lpz != null)
+            {
+                selectData.CommandText += "AND invalidityLpzID=:lpz ";
+                selectData.Parameters.Add(":lpz", DbType.String);
+                selectData.Parameters[":lpz"].Value = data.lpz;
+            }
+            if (data.orphanDiseases)
+            {
+                selectData.CommandText += "AND mkbCode IN (SELECT diagnosis.codeMKB FROM diagnosis WHERE diagnosis.isOrphan = 1) ";                
+            }
+            connect();
+            adapter.Fill(searchResult);
+            disconnect();
+            return searchResult;            
         }
     }
 }

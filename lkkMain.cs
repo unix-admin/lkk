@@ -11,6 +11,13 @@ namespace LKK
     public partial class lkkMain : Form
     {
         Database lkkData = new Database();
+        private static string mkbCode;
+
+        public static void setMkb(string code)
+        {
+            mkbCode = code;
+        }
+
         
         public lkkMain()
         {
@@ -21,6 +28,8 @@ namespace LKK
             region.DisplayMember = "title";
             department.DataSource = lkkData.getDepartments();
             department.DisplayMember = "title";
+            LPZ.DataSource = lkkData.getLPZ();
+            LPZ.DisplayMember = "title";
         }
 
         private void region_SelectionChangeCommitted(object sender, EventArgs e)
@@ -35,7 +44,7 @@ namespace LKK
         private void toDatabase_Click(object sender, EventArgs e)
         {
             Database.lkkData lkkDataToInsert;
-            lkkDataToInsert.date = lkkDate.Value.ToShortDateString();
+            lkkDataToInsert.date = lkkDate.Value.ToString("yyyy-MM-dd");
             lkkDataToInsert.number = lkkNumber.Text;
             lkkDataToInsert.department = department.Text;
             lkkDataToInsert.doctor = doctor.Text;
@@ -47,17 +56,19 @@ namespace LKK
             lkkDataToInsert.address = address.Text;
             lkkDataToInsert.addressWork = work.Text;
             lkkDataToInsert.position = position.Text;
-            //lkkDataToInsert.mkbCode;
+            lkkDataToInsert.mkbCode = mkbCode;
             lkkDataToInsert.diagnose = diagnose.Text;
             lkkDataToInsert.lkk = lkk.Text;
             lkkDataToInsert.msek = msek.Text;
             lkkDataToInsert.addition = additions.Text;
             lkkDataToInsert.sex = sex.Text;
-            lkkDataToInsert.status = Program.status;
-            lkkData.insertData(lkkDataToInsert);
-            string[] words = town.Text.Split('.');
-            string a = words[0];
-            string b = words[words.Length - 1]; 
+            lkkDataToInsert.status = Program.status.ToString();
+            lkkDataToInsert.haveInvalidity = invalidity.Checked;
+            lkkDataToInsert.InvalidityDate = invalidityDate.Value.ToShortDateString();
+            lkkDataToInsert.InvalidityLPZ = LPZ.Text;
+            string id = lkkData.insertData(lkkDataToInsert);
+            ReportLKK rep = new ReportLKK();
+            rep.showInfedenceLKK(id);            
         }
 
         private void addDoctor_Click(object sender, EventArgs e)
@@ -76,7 +87,7 @@ namespace LKK
             formData diagnosis = new formData();
             diagnosis.setFormType(formData.formTypes.DIAGNOSE);
             diagnosis.setFormActions(formData.formActions.WORK);
-            diagnosis.getTextArea(ref diagnose);
+            diagnosis.getTextArea(ref diagnose);            
             diagnosis.ShowDialog();            
         }
 
@@ -94,8 +105,6 @@ namespace LKK
             LKK.setFormActions(formData.formActions.WORK);
             LKK.getTextArea(ref lkk);
             LKK.ShowDialog();
-
-
         }
 
         private void addTown_Click(object sender, EventArgs e)
@@ -111,6 +120,49 @@ namespace LKK
             addData departmentAdd = new addData();
             departmentAdd.setType(addData.formType.DEPARTMENTS, addData.formAction.ADD);
             departmentAdd.ShowDialog();
+        }
+
+        private void invalidity_CheckedChanged(object sender, EventArgs e)
+        {
+            if (invalidity.Checked)
+            {
+                invalidityDate.Enabled = true;
+                
+                
+            }
+            else 
+            {
+                invalidityDate.Enabled = false;
+                
+                
+            }
+        }
+
+        private void yearBirth_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
+                e.Handled = true;
+        }
+
+        private void age_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8)
+                e.Handled = true;
+        }
+
+        private void yearBirth_TextChanged(object sender, EventArgs e)
+        {
+            if (yearBirth.Text != "")
+            age.Text = (DateTime.Now.Year - Int16.Parse(yearBirth.Text)).ToString();
+        }
+
+        private void buttonAddLPZ_Click(object sender, EventArgs e)
+        {
+            addData lpzAdd = new addData();
+            lpzAdd.setType(addData.formType.LPZ, addData.formAction.ADD);
+            lpzAdd.ShowDialog();
+            doctor.DataSource = lkkData.getLPZ();
+            doctor.DisplayMember = "title";
         }
     }
 }

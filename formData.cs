@@ -12,6 +12,7 @@ namespace LKK
     {
         private Database lkk = new Database();
         private RichTextBox textArea;
+        
         public enum formTypes
         {
             DOCTORS = 0
@@ -80,6 +81,10 @@ namespace LKK
                     formType = formTypes.DIAGNOSE;
                     gridInit();
                     break;
+               case formTypes.MEMBERSLKK:
+                    formType = formTypes.MEMBERSLKK;
+                    gridInit();
+                    break;
             }
         }
 
@@ -121,15 +126,20 @@ namespace LKK
             if (actions == formActions.WORK)
             {
                 if (mainDs.Visible == true && mainDs.Checked == true)
-                {
-                    formData subDiagnose = new formData();
-                    subDiagnose.ShowDialog();
-                    mainDs.Checked = false;
-
+                {                    
+                    textArea.Text += dataGridView1.CurrentRow.Cells[0].Value.ToString() +" "+dataGridView1.CurrentRow.Cells[1].Value.ToString() + formaText + stadiaText + ". ";
+                    mainDs.Checked = false;                    
+                    lkkMain.setMkb(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                    
                 }
                 else
                 {
-                    textArea.Text += dataGridView1.CurrentCell.Value.ToString() +formaText+stadiaText+". ";
+                    if (formType == formTypes.DIAGNOSE)
+                    {                        
+                        textArea.Text += dataGridView1.CurrentRow.Cells[1].Value.ToString() + formaText + stadiaText + ". ";
+                    }
+                    else
+                        textArea.Text += dataGridView1.CurrentRow.Cells[0].Value.ToString();
                     formaText = "";
                     stadiaText = "";
                     Light.Checked = false;
@@ -210,14 +220,23 @@ namespace LKK
                     dataGridView1.DataSource = lkk.getDepartments();
                     dataGridView1.Columns[0].HeaderText = "Назва";
                     break;
-                case formTypes.REGIONS:
-                   
+                case formTypes.REGIONS:                   
                     dataGridView1.DataSource = lkk.getRegions();
                     dataGridView1.Columns[0].HeaderText = "Назва";
                     break;
-                case formTypes.DIAGNOSE:                 
-                    dataGridView1.Columns[0].Visible = false;
+                case formTypes.DIAGNOSE:
+                    dataGridView1.DataSource = lkk.getDiagnose();
+                  //  dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[0].HeaderText = "Код МКХ";
+                    dataGridView1.Columns[0].Width = 50;
                     dataGridView1.Columns[1].HeaderText = "Диагноз";
+                    break;
+                case formTypes.MEMBERSLKK:
+                    dataGridView1.DataSource = lkk.getMembersLkk();
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[1].HeaderText = "ПІБ";                    
+                    dataGridView1.Columns[2].HeaderText = "Голова ЛКК";
+                    dataGridView1.Columns[2].Width = 50;
                     break;
             }
             dataGridView1.Sort(dataGridView1.Columns[dataGridView1.ColumnCount - 1], ListSortDirection.Ascending); 
