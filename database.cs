@@ -663,7 +663,7 @@ namespace LKK
             }
             if (data.ageStart != null)
             {
-                selectData.CommandText += "AND age>=:ageStart AND age <=:endAge ";
+                selectData.CommandText += "AND age>=:startAge AND age <=:endAge ";
                 selectData.Parameters.Add(":startAge", DbType.String);
                 selectData.Parameters.Add(":endAge", DbType.String);
                 selectData.Parameters[":startAge"].Value = data.ageStart;
@@ -686,6 +686,11 @@ namespace LKK
                 selectData.CommandText += "AND invalidityLpzID=:lpz ";
                 selectData.Parameters.Add(":lpz", DbType.String);
                 selectData.Parameters[":lpz"].Value = data.lpz;
+            }
+            if (data.excludeTill18) 
+            {
+                selectData.CommandText += "AND birth >" + (DateTime.Now.Year - 18).ToString();
+                
             }
             if (data.orphanDiseases)
             {

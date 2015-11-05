@@ -37,6 +37,7 @@ namespace LKK
         public string region;
         public string diagnose;
         public string lpz;
+        public bool excludeTill18;
         public bool orphanDiseases;
     };
 

@@ -39,7 +39,7 @@
             this.region = new System.Windows.Forms.CheckBox();
             this.diagnose = new System.Windows.Forms.CheckBox();
             this.diagnoseBox = new System.Windows.Forms.ComboBox();
-            this.manWoman = new System.Windows.Forms.CheckBox();
+            this.excludeTill18 = new System.Windows.Forms.CheckBox();
             this.orphanDiseases = new System.Windows.Forms.CheckBox();
             this.lpzBox = new System.Windows.Forms.ComboBox();
             this.checkLPZ = new System.Windows.Forms.CheckBox();
@@ -163,15 +163,15 @@
             this.diagnoseBox.Size = new System.Drawing.Size(280, 21);
             this.diagnoseBox.TabIndex = 11;
             // 
-            // manWoman
+            // excludeTill18
             // 
-            this.manWoman.AutoSize = true;
-            this.manWoman.Location = new System.Drawing.Point(12, 243);
-            this.manWoman.Name = "manWoman";
-            this.manWoman.Size = new System.Drawing.Size(334, 17);
-            this.manWoman.TabIndex = 12;
-            this.manWoman.Text = "Виключити осіб яким на даний домент виповнилося 18 років";
-            this.manWoman.UseVisualStyleBackColor = true;
+            this.excludeTill18.AutoSize = true;
+            this.excludeTill18.Location = new System.Drawing.Point(12, 243);
+            this.excludeTill18.Name = "excludeTill18";
+            this.excludeTill18.Size = new System.Drawing.Size(334, 17);
+            this.excludeTill18.TabIndex = 12;
+            this.excludeTill18.Text = "Виключити осіб яким на даний домент виповнилося 18 років";
+            this.excludeTill18.UseVisualStyleBackColor = true;
             // 
             // orphanDiseases
             // 
@@ -252,7 +252,7 @@
             this.Controls.Add(this.lpzBox);
             this.Controls.Add(this.checkLPZ);
             this.Controls.Add(this.orphanDiseases);
-            this.Controls.Add(this.manWoman);
+            this.Controls.Add(this.excludeTill18);
             this.Controls.Add(this.diagnoseBox);
             this.Controls.Add(this.diagnose);
             this.Controls.Add(this.region);
@@ -286,7 +286,7 @@
         private System.Windows.Forms.CheckBox region;
         private System.Windows.Forms.CheckBox diagnose;
         private System.Windows.Forms.ComboBox diagnoseBox;
-        private System.Windows.Forms.CheckBox manWoman;
+        private System.Windows.Forms.CheckBox excludeTill18;
         private System.Windows.Forms.CheckBox orphanDiseases;
         private System.Windows.Forms.ComboBox lpzBox;
         private System.Windows.Forms.CheckBox checkLPZ;

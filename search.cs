@@ -32,7 +32,8 @@ namespace LKK
             searchData.fio = null;
             searchData.region = null;
             searchData.diagnose = null;
-            searchData.lpz = null;           
+            searchData.lpz = null;
+            searchData.excludeTill18 = false;
             searchData.orphanDiseases = false;
         }
 
@@ -63,9 +64,9 @@ namespace LKK
             {
                 searchData.lpz = lpzBox.Text;
             }
-            if (manWoman.Checked)
+            if (excludeTill18.Checked)
             {
-               // searchData.percentManWoman = true;
+               searchData.excludeTill18 = true;
             }
             if (orphanDiseases.Checked)
             {
