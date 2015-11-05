@@ -82,6 +82,7 @@
             this.deleteButton.TabIndex = 2;
             this.deleteButton.Text = "Видилити дані";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Visible = false;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // modifyButton
