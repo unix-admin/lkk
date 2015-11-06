@@ -25,11 +25,12 @@ namespace LKK
             doctor.DataSource = lkkData.getDoctors();
             doctor.DisplayMember = "fio";
             region.DataSource = lkkData.getRegions();
-            region.DisplayMember = "title";
+            region.DisplayMember = "title";            
             department.DataSource = lkkData.getDepartments();
             department.DisplayMember = "title";
             LPZ.DataSource = lkkData.getLPZ();
             LPZ.DisplayMember = "title";
+            sex.SelectedIndex = 0;   
         }
 
         private void region_SelectionChangeCommitted(object sender, EventArgs e)
@@ -163,6 +164,11 @@ namespace LKK
             lpzAdd.ShowDialog();
             doctor.DataSource = lkkData.getLPZ();
             doctor.DisplayMember = "title";
+        }
+
+        private void lkkMain_Shown(object sender, EventArgs e)
+        {
+            region_SelectionChangeCommitted(this, e);
         }
     }
 }

@@ -335,6 +335,7 @@
             this.town.Location = new System.Drawing.Point(82, 134);
             this.town.Name = "town";
             this.town.Size = new System.Drawing.Size(176, 21);
+            this.town.Sorted = true;
             this.town.TabIndex = 29;
             // 
             // addTown
@@ -573,7 +574,8 @@
             this.Name = "lkkMain";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "lkkMain";
+            this.Text = "Введення даних";
+            this.Shown += new System.EventHandler(this.lkkMain_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

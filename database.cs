@@ -203,19 +203,27 @@ namespace LKK
            return members;
        }
 
-       public DataTable getDiagnose()
+       public DataTable getDiagnose(bool fillCombobox)
        {
            DataTable diagnose = new DataTable();
            SQLiteDataAdapter data = new SQLiteDataAdapter();
            SQLiteCommand selectData = new SQLiteCommand();
            selectData.Connection = connection;
-           selectData.CommandText = "SELECT codeMKB, title AS diagnose FROM diagnosis WHERE deleted='false'";
+           if (fillCombobox)
+           {
+               selectData.CommandText = "SELECT codeMKB || ' ' || title AS diagnose FROM diagnosis WHERE deleted='false' AND codeMKB !=''";
+           }
+           else
+           {
+               selectData.CommandText = "SELECT codeMKB , title, isOrphan AS diagnose FROM diagnosis WHERE deleted = 0";
+           }
            data.SelectCommand = selectData;
            connect();
            data.Fill(diagnose);
            disconnect();
            return diagnose;
        }
+
        public DataTable getLKK()
        {
            DataTable LKK = new DataTable();
@@ -443,6 +451,23 @@ namespace LKK
            insertSQLCommand.ExecuteNonQuery();
            disconnect();
        }
+        //For diagnoses only
+       public void addData(string mkbCode, string title, bool isOrphan)
+       {
+
+           insertSQLCommand.CommandText = "INSERT INTO diagnosis (codeMKB, title, isOrphan) VALUES(:codeMKB, :title, :isOrphan)";
+           insertSQLCommand.Parameters.Add(":codeMKB", DbType.String);
+           insertSQLCommand.Parameters.Add(":title", DbType.String);
+           insertSQLCommand.Parameters.Add(":isOrphan", DbType.Boolean);
+           insertSQLCommand.Parameters[":codeMKB"].Value = mkbCode;
+           insertSQLCommand.Parameters[":title"].Value = title;
+           insertSQLCommand.Parameters[":isOrphan"].Value = isOrphan;
+           connect();
+           insertSQLCommand.ExecuteNonQuery();
+           disconnect();
+       }
+
+
        public void addTown(string type, string regionID, string value)
        {
            insertSQLCommand.CommandText = "INSERT INTO towns (type, regionID, title) VALUES(:type, :regionID, :title)";
@@ -650,11 +675,17 @@ namespace LKK
             SQLiteDataAdapter adapter = new SQLiteDataAdapter();
             adapter.SelectCommand = selectData;
             selectData.Connection = connection;
-            selectData.CommandText = "SELECT * FROM infedenceView WHERE data BETWEEN :dataStart AND :dataEnd ";
-            selectData.Parameters.Add(":dataStart", DbType.String);
-            selectData.Parameters.Add(":dataEnd", DbType.String);
-            selectData.Parameters[":dataStart"].Value = data.dateBegin;
-            selectData.Parameters[":dataEnd"].Value = data.dateEnd;            
+            selectData.CommandText = "SELECT * FROM infedenceView WHERE status=:status";
+            selectData.Parameters.Add(":status", DbType.Int32);
+            selectData.Parameters[":status"].Value = Program.status;
+            if (data.dateBegin != null && data.dateEnd !=null)
+            {
+                selectData.CommandText += " AND data BETWEEN :dataStart AND :dataEnd ";
+                selectData.Parameters.Add(":dataStart", DbType.String);
+                selectData.Parameters.Add(":dataEnd", DbType.String);
+                selectData.Parameters[":dataStart"].Value = data.dateBegin;
+                selectData.Parameters[":dataEnd"].Value = data.dateEnd;
+            }                                    
             if (data.fio != null)
             {
                 selectData.CommandText += "AND fio=:fio ";                

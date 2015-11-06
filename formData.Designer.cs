@@ -80,7 +80,7 @@
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(118, 23);
             this.deleteButton.TabIndex = 2;
-            this.deleteButton.Text = "Видилити дані";
+            this.deleteButton.Text = "Видалити дані";
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Visible = false;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
@@ -102,9 +102,9 @@
             this.mainDs.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mainDs.Location = new System.Drawing.Point(13, 265);
             this.mainDs.Name = "mainDs";
-            this.mainDs.Size = new System.Drawing.Size(146, 17);
+            this.mainDs.Size = new System.Drawing.Size(161, 17);
             this.mainDs.TabIndex = 4;
-            this.mainDs.Text = "Использовать код МКБ";
+            this.mainDs.Text = "Використовувати код МКХ";
             this.mainDs.UseVisualStyleBackColor = true;
             this.mainDs.Visible = false;
             // 

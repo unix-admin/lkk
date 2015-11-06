@@ -36,16 +36,16 @@ namespace LKK
             mansCount = result.DefaultView.Count;
             result.DefaultView.RowFilter = "sex='Ж'";
             womansCount = result.DefaultView.Count;
-            //result.DefaultView.RowFilter = "haveInvalidity=1";
-            //invalidCount = result.DefaultView.Count;
+            result.DefaultView.RowFilter = "haveInvalidity=1";
+            invalidCount = result.DefaultView.Count;
             result.DefaultView.RowFilter = null;
             allRows.Text += count.ToString();
             if (count > 0)
             {
                 percent = Convert.ToDouble(mansCount) / Convert.ToDouble(count);
-                mans.Text += Math.Round(percent * 100, 2).ToString() + "%";
+                mans.Text += Math.Round(percent * 100, 2).ToString() + "% (" + mansCount.ToString()+")";
                 percent = Convert.ToDouble(womansCount) / Convert.ToDouble(count);
-                womans.Text += Math.Round(percent * 100, 2).ToString() + "%";
+                womans.Text += Math.Round(percent * 100, 2).ToString() + "% (" + womansCount.ToString() + ")";
                 percent = Convert.ToDouble(invalidCount) / Convert.ToDouble(count);
                 invalidity.Text += Math.Round(percent * 100, 2).ToString() + "%";
             }
@@ -78,8 +78,7 @@ namespace LKK
             resultsLKK.Columns[20].Visible = false;
             resultsLKK.Columns[21].Visible = false;
             resultsLKK.Columns[22].Visible = false;
-
-
+            resultsLKK.Columns[23].Visible = false;
         }
 
         private void printButton_Click(object sender, EventArgs e)
@@ -91,8 +90,7 @@ namespace LKK
             }
             if (printAll.Checked)
             {
-                report.showReportLKK("", result);
-                //report.showInfedenceLKK(resultsLKK.CurrentRow.Cells[0].Value.ToString());
+                report.showReportLKK("", result);                
             }
             if (printReport.Checked)
             {

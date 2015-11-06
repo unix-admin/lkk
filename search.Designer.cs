@@ -46,7 +46,7 @@
             this.startSearch = new System.Windows.Forms.Button();
             this.betweenLKK = new System.Windows.Forms.Label();
             this.betweenAge = new System.Windows.Forms.Label();
-            this.lkkDate = new System.Windows.Forms.Label();
+            this.lkkDateBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.ageStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ageEnd)).BeginInit();
             this.SuspendLayout();
@@ -54,18 +54,20 @@
             // startLKKdate
             // 
             this.startLKKdate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.startLKKdate.Location = new System.Drawing.Point(171, 12);
+            this.startLKKdate.Location = new System.Drawing.Point(171, 17);
             this.startLKKdate.Name = "startLKKdate";
             this.startLKKdate.Size = new System.Drawing.Size(92, 20);
             this.startLKKdate.TabIndex = 0;
+            this.startLKKdate.ValueChanged += new System.EventHandler(this.startLKKdate_ValueChanged);
             // 
             // endLKKDate
             // 
             this.endLKKDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.endLKKDate.Location = new System.Drawing.Point(286, 12);
+            this.endLKKDate.Location = new System.Drawing.Point(286, 17);
             this.endLKKDate.Name = "endLKKDate";
             this.endLKKDate.Size = new System.Drawing.Size(94, 20);
             this.endLKKDate.TabIndex = 1;
+            this.endLKKDate.ValueChanged += new System.EventHandler(this.endLKKDate_ValueChanged);
             // 
             // Surname
             // 
@@ -109,6 +111,7 @@
             this.ageStart.Name = "ageStart";
             this.ageStart.Size = new System.Drawing.Size(87, 20);
             this.ageStart.TabIndex = 6;
+            this.ageStart.ValueChanged += new System.EventHandler(this.ageStart_ValueChanged);
             // 
             // ageEnd
             // 
@@ -122,6 +125,7 @@
             this.ageEnd.Name = "ageEnd";
             this.ageEnd.Size = new System.Drawing.Size(92, 20);
             this.ageEnd.TabIndex = 7;
+            this.ageEnd.ValueChanged += new System.EventHandler(this.ageEnd_ValueChanged);
             // 
             // regionBox
             // 
@@ -130,6 +134,7 @@
             this.regionBox.Location = new System.Drawing.Point(73, 127);
             this.regionBox.Name = "regionBox";
             this.regionBox.Size = new System.Drawing.Size(218, 21);
+            this.regionBox.Sorted = true;
             this.regionBox.TabIndex = 8;
             // 
             // region
@@ -161,6 +166,7 @@
             this.diagnoseBox.Location = new System.Drawing.Point(98, 165);
             this.diagnoseBox.Name = "diagnoseBox";
             this.diagnoseBox.Size = new System.Drawing.Size(280, 21);
+            this.diagnoseBox.Sorted = true;
             this.diagnoseBox.TabIndex = 11;
             // 
             // excludeTill18
@@ -190,6 +196,7 @@
             this.lpzBox.Location = new System.Drawing.Point(98, 204);
             this.lpzBox.Name = "lpzBox";
             this.lpzBox.Size = new System.Drawing.Size(280, 21);
+            this.lpzBox.Sorted = true;
             this.lpzBox.TabIndex = 15;
             // 
             // checkLPZ
@@ -216,7 +223,7 @@
             // betweenLKK
             // 
             this.betweenLKK.AutoSize = true;
-            this.betweenLKK.Location = new System.Drawing.Point(265, 16);
+            this.betweenLKK.Location = new System.Drawing.Point(265, 21);
             this.betweenLKK.Name = "betweenLKK";
             this.betweenLKK.Size = new System.Drawing.Size(19, 13);
             this.betweenLKK.TabIndex = 17;
@@ -231,21 +238,25 @@
             this.betweenAge.TabIndex = 18;
             this.betweenAge.Text = "до";
             // 
-            // lkkDate
+            // lkkDateBox
             // 
-            this.lkkDate.AutoSize = true;
-            this.lkkDate.Location = new System.Drawing.Point(14, 15);
-            this.lkkDate.Name = "lkkDate";
-            this.lkkDate.Size = new System.Drawing.Size(156, 13);
-            this.lkkDate.TabIndex = 19;
-            this.lkkDate.Text = "Дата засідання ЛКК            з:";
+            this.lkkDateBox.AutoSize = true;
+            this.lkkDateBox.Checked = true;
+            this.lkkDateBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.lkkDateBox.Location = new System.Drawing.Point(12, 18);
+            this.lkkDateBox.Name = "lkkDateBox";
+            this.lkkDateBox.Size = new System.Drawing.Size(154, 17);
+            this.lkkDateBox.TabIndex = 19;
+            this.lkkDateBox.Text = "Дата засідання ЛКК     з:";
+            this.lkkDateBox.UseVisualStyleBackColor = true;
+            this.lkkDateBox.CheckedChanged += new System.EventHandler(this.lkkDateBox_CheckedChanged);
             // 
             // search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(405, 306);
-            this.Controls.Add(this.lkkDate);
+            this.Controls.Add(this.lkkDateBox);
             this.Controls.Add(this.betweenAge);
             this.Controls.Add(this.betweenLKK);
             this.Controls.Add(this.startSearch);
@@ -264,8 +275,11 @@
             this.Controls.Add(this.Surname);
             this.Controls.Add(this.endLKKDate);
             this.Controls.Add(this.startLKKdate);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(421, 345);
             this.Name = "search";
-            this.Text = "search";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Пошук";
             ((System.ComponentModel.ISupportInitialize)(this.ageStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ageEnd)).EndInit();
             this.ResumeLayout(false);
@@ -293,6 +307,6 @@
         private System.Windows.Forms.Button startSearch;
         private System.Windows.Forms.Label betweenLKK;
         private System.Windows.Forms.Label betweenAge;
-        private System.Windows.Forms.Label lkkDate;
+        private System.Windows.Forms.CheckBox lkkDateBox;
     }
 }

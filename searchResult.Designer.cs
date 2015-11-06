@@ -146,7 +146,7 @@
             // womans
             // 
             this.womans.AutoSize = true;
-            this.womans.Location = new System.Drawing.Point(98, 31);
+            this.womans.Location = new System.Drawing.Point(131, 31);
             this.womans.Name = "womans";
             this.womans.Size = new System.Drawing.Size(44, 13);
             this.womans.TabIndex = 2;
@@ -183,7 +183,7 @@
             this.Controls.Add(this.printLKK);
             this.Controls.Add(this.resultsLKK);
             this.Name = "searchResult";
-            this.Text = "searchResult";
+            this.Text = "Результати пошуку";
             this.Shown += new System.EventHandler(this.searchResult_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.resultsLKK)).EndInit();
             this.statistic.ResumeLayout(false);

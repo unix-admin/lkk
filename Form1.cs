@@ -82,6 +82,7 @@ namespace LKK
         private void searchToolStripMenuItem_Click(object sender, EventArgs e)
         {
             search lkkSearch = new search();
+            lkkSearch.MdiParent = this;
             lkkSearch.Show();
         }
 

@@ -225,11 +225,12 @@ namespace LKK
                     dataGridView1.Columns[0].HeaderText = "Назва";
                     break;
                 case formTypes.DIAGNOSE:
-                    dataGridView1.DataSource = lkk.getDiagnose();
+                    dataGridView1.DataSource = lkk.getDiagnose(false);
                   //  dataGridView1.Columns[0].Visible = false;
                     dataGridView1.Columns[0].HeaderText = "Код МКХ";
                     dataGridView1.Columns[0].Width = 50;
                     dataGridView1.Columns[1].HeaderText = "Диагноз";
+                    dataGridView1.Columns[2].Visible = false;
                     break;
                 case formTypes.MEMBERSLKK:
                     dataGridView1.DataSource = lkk.getMembersLkk();
@@ -254,8 +255,10 @@ namespace LKK
                     gridInit();
                     break;
                 case formTypes.DIAGNOSE:
+
                     modifyData.setType(addData.formType.DIAGNOSE, addData.formAction.MODIFY);
-                    modifyData.setDataToUpdate(dataGridView1.CurrentCell.Value.ToString(), "");
+
+                    modifyData.setDataToUpdate(dataGridView1.CurrentRow.Cells[0].Value.ToString(), dataGridView1.CurrentRow.Cells[1].Value.ToString(),Convert.ToBoolean(dataGridView1.CurrentRow.Cells[2].Value));
                     modifyData.ShowDialog();                   
                     gridInit();
                     break;

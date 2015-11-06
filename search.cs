@@ -18,7 +18,7 @@ namespace LKK
             initSearchData();
             regionBox.DataSource = lkkDatabase.getRegions();
             regionBox.DisplayMember = "title";
-            diagnoseBox.DataSource = lkkDatabase.getDiagnose();
+            diagnoseBox.DataSource = lkkDatabase.getDiagnose(true);
             diagnoseBox.DisplayMember = "diagnose";
             lpzBox.DataSource = lkkDatabase.getLPZ();
             lpzBox.DisplayMember = "title";
@@ -39,10 +39,11 @@ namespace LKK
 
         private void startSearch_Click(object sender, EventArgs e)
         {
-
-            searchData.dateBegin = startLKKdate.Value.ToString("yyyy-MM-dd");
-            searchData.dateEnd = endLKKDate.Value.ToString("yyyy-MM-dd");
-
+            if (lkkDateBox.Checked)
+            {
+                searchData.dateBegin = startLKKdate.Value.ToString("yyyy-MM-dd");
+                searchData.dateEnd = endLKKDate.Value.ToString("yyyy-MM-dd");
+            }
             if (Surname.Checked)
             {
                 searchData.fio = surnameText.Text;        
@@ -74,6 +75,7 @@ namespace LKK
             }
             searchResult result = new searchResult();
             result.start(searchData);
+            result.MdiParent = this.MdiParent;
             result.Show();
             initSearchData();
         }
@@ -122,6 +124,53 @@ namespace LKK
                 lpzBox.Enabled = true;
             else
                 lpzBox.Enabled = false;
+        }
+
+        private void endLKKDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (endLKKDate.Value < startLKKdate.Value)
+            {
+                endLKKDate.Value = startLKKdate.Value;
+            }
+        }
+
+        private void startLKKdate_ValueChanged(object sender, EventArgs e)
+        {
+            if (startLKKdate.Value > endLKKDate.Value)
+            {
+                startLKKdate.Value = endLKKDate.Value;
+            }
+        }
+
+        private void ageStart_ValueChanged(object sender, EventArgs e)
+        {
+            if (ageStart.Value > ageEnd.Value)
+            {
+                ageStart.Value = ageEnd.Value;
+            }
+
+        }
+
+        private void ageEnd_ValueChanged(object sender, EventArgs e)
+        {
+            if(ageEnd.Value < ageStart.Value)
+            {
+                ageEnd.Value = ageStart.Value;
+            }
+        }
+
+        private void lkkDateBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (lkkDateBox.Checked)
+            {
+                startLKKdate.Enabled = true;
+                endLKKDate.Enabled = true;
+            }
+            else
+            {
+                startLKKdate.Enabled = false;
+                endLKKDate.Enabled = false;
+            }
         }                        
 
        

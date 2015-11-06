@@ -64,7 +64,7 @@
             // nameValue
             // 
             this.nameValue.AutoSize = true;
-            this.nameValue.Location = new System.Drawing.Point(52, 15);
+            this.nameValue.Location = new System.Drawing.Point(81, 9);
             this.nameValue.Name = "nameValue";
             this.nameValue.Size = new System.Drawing.Size(60, 13);
             this.nameValue.TabIndex = 3;

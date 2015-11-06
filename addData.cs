@@ -31,9 +31,15 @@ namespace LKK
         private formType type;
         private formAction action;        
         private ComboBox townTypes = new ComboBox();
+        private TextBox mkbCodeText = new TextBox();
+        private CheckBox isOrphanBox = new CheckBox();
+        private Label mkbLabel = new Label();
+        private Label orphanLabel = new Label();
+
         private string regionID;
         private string dataToUpdate;
         private string typeTownToUpdate;
+        
         public addData()
         {
             InitializeComponent();
@@ -48,6 +54,16 @@ namespace LKK
             valueToEdit.Text = data;
             typeTownToUpdate = townType;
         }
+        //For Diagnose only
+        public void setDataToUpdate(string mkbCode, string diagnose, bool isOrphan)
+        {
+            dataToUpdate = diagnose;
+            valueToEdit.Text = dataToUpdate;
+            mkbCodeText.Text = mkbCode;
+            isOrphanBox.Checked = isOrphan;
+            
+        }
+
         public void setType(formType formTypes, formAction formActions)
         {
             type = formTypes;            
@@ -80,6 +96,7 @@ namespace LKK
                     break;
                 case formType.DIAGNOSE:
                     nameValue.Text = "Діагноз";
+                    repaintToDiagnoseForm();
                     break;
                 case formType.DOCTORS:
                     nameValue.Text = "ПІБ Лікаря";
@@ -107,7 +124,7 @@ namespace LKK
                             lkk.addData(Database.typesData.department, valueToEdit.Text);                            
                             break;
                         case formType.DIAGNOSE:
-                            lkk.addData(Database.typesData.diagnose, valueToEdit.Text);
+                            lkk.addData(mkbCodeText.Text, valueToEdit.Text, isOrphanBox.Checked);
                                 break;
                         case formType.DOCTORS:
                             lkk.addData(Database.typesData.doctor,valueToEdit.Text);
@@ -158,6 +175,22 @@ namespace LKK
         private void cancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        private void repaintToDiagnoseForm()
+        {
+            this.Controls.Add(mkbCodeText);
+            this.Controls.Add(isOrphanBox);
+            this.Controls.Add(orphanLabel);
+            this.Controls.Add(mkbLabel);
+            mkbCodeText.Location = new Point(12, 39);
+            mkbCodeText.Size = new Size(58, 20);
+            valueToEdit.Location = new Point(77, 39);
+            valueToEdit.Size = new Size(347, 20);
+            isOrphanBox.Location = new Point(440, 39);
+            mkbLabel.Location = new Point(12, 9);
+            mkbLabel.Text = "Код МКХ";
+            orphanLabel.Location = new Point(407, 9);
+            orphanLabel.Text = "Орфанне";                             
         }
 
     }
