@@ -17,7 +17,7 @@ namespace LKK
             rep = dataToReport.getInfedenceLKK (id);
             Report infedence = new Report();
             infedence.Load("infedence.frx");
-            infedence.RegisterData(rep);                       
+            infedence.RegisterData(rep);            
             infedence.Show();
         }
         public void showReportLKK(string id, DataTable results)

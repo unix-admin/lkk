@@ -15,6 +15,7 @@ namespace LKK
             InitializeComponent();
         }
         public lkkSearchData searchData;
+        Database lkk = new Database();
         DataTable result = new DataTable();
         public void start(lkkSearchData dataToSearch)
         {
@@ -23,8 +24,7 @@ namespace LKK
 
         private void searchResult_Shown(object sender, EventArgs e)
         {
-            Database lkk = new Database();
-            
+                        
             int mansCount;
             int womansCount;
             int invalidCount = 0;
@@ -39,15 +39,15 @@ namespace LKK
             result.DefaultView.RowFilter = "haveInvalidity=1";
             invalidCount = result.DefaultView.Count;
             result.DefaultView.RowFilter = null;
-            allRows.Text += count.ToString();
+            allRows.Text = "Всього записів: " + count.ToString();
             if (count > 0)
             {
                 percent = Convert.ToDouble(mansCount) / Convert.ToDouble(count);
-                mans.Text += Math.Round(percent * 100, 2).ToString() + "% (" + mansCount.ToString()+")";
+                mans.Text ="Чоловіків: "+ Math.Round(percent * 100, 2).ToString() + "% (" + mansCount.ToString()+")";
                 percent = Convert.ToDouble(womansCount) / Convert.ToDouble(count);
-                womans.Text += Math.Round(percent * 100, 2).ToString() + "% (" + womansCount.ToString() + ")";
+                womans.Text = "Жінок: " + Math.Round(percent * 100, 2).ToString() + "% (" + womansCount.ToString() + ")";
                 percent = Convert.ToDouble(invalidCount) / Convert.ToDouble(count);
-                invalidity.Text += Math.Round(percent * 100, 2).ToString() + "%";
+                invalidity.Text = "Інвалідів:" + Math.Round(percent * 100, 2).ToString() + "%";
             }
 
             resultsLKK.DataSource = result;
@@ -59,9 +59,10 @@ namespace LKK
             resultsLKK.Columns[2].Width = 7;
             resultsLKK.Columns[3].Visible = false;
             resultsLKK.Columns[4].Visible = false;
-            resultsLKK.Columns[5].HeaderText = "ПІБ";
+            resultsLKK.Columns[5].Visible = false;
+            resultsLKK.Columns[6].HeaderText = "ПІБ";
 
-            resultsLKK.Columns[6].Visible = false;
+            
             resultsLKK.Columns[7].Visible = false;
             resultsLKK.Columns[8].Visible = false;
             resultsLKK.Columns[9].Visible = false;
@@ -79,6 +80,7 @@ namespace LKK
             resultsLKK.Columns[21].Visible = false;
             resultsLKK.Columns[22].Visible = false;
             resultsLKK.Columns[23].Visible = false;
+            resultsLKK.Columns[24].Visible = false;
         }
 
         private void printButton_Click(object sender, EventArgs e)
@@ -96,6 +98,18 @@ namespace LKK
             {
                 report.showReportLKK(resultsLKK.CurrentRow.Cells[0].Value.ToString(), result);
             }
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            lkkMain lkkForm = new lkkMain();
+            lkkForm.setUpdateData(resultsLKK.CurrentRow.Cells[0].Value.ToString());            
+            lkkForm.ShowDialog();
+            
+            result.Clear();
+            resultsLKK.DataSource = null;
+            resultsLKK.Refresh();
+            searchResult_Shown(this, e);
         }
 
     }

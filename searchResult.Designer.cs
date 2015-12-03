@@ -110,6 +110,7 @@
             this.editButton.TabIndex = 6;
             this.editButton.Text = "Змінити";
             this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
             // statistic
             // 
@@ -128,7 +129,7 @@
             // invalidity
             // 
             this.invalidity.AutoSize = true;
-            this.invalidity.Location = new System.Drawing.Point(6, 65);
+            this.invalidity.Location = new System.Drawing.Point(6, 48);
             this.invalidity.Name = "invalidity";
             this.invalidity.Size = new System.Drawing.Size(56, 13);
             this.invalidity.TabIndex = 4;
@@ -137,11 +138,12 @@
             // children
             // 
             this.children.AutoSize = true;
-            this.children.Location = new System.Drawing.Point(6, 48);
+            this.children.Location = new System.Drawing.Point(6, 65);
             this.children.Name = "children";
             this.children.Size = new System.Drawing.Size(100, 13);
             this.children.TabIndex = 3;
             this.children.Text = "Дітей до 18 років: ";
+            this.children.Visible = false;
             // 
             // womans
             // 

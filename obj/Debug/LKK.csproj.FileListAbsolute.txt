@@ -38,7 +38,13 @@ d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.csproj.Ge
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.exe
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.pdb
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.searchResult.resources
-d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.csprojResolveAssemblyReference.cache
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\bin\Debug\System.Data.SQLite.dll
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.Mode.resources
 C:\Users\adm\Documents\Visual Studio 2012\Projects\LKK\obj\Debug\LKK.searchResult.resources
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\bin\Debug\LKK.exe.manifest
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\bin\Debug\LKK.application
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.AboutBox1.resources
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.TrustInfo.xml
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.exe.manifest
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.application
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.csprojResolveAssemblyReference.cache

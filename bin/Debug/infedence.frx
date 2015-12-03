@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="02/26/2010 18:08:33" ReportInfo.Modified="11/02/2015 10:10:20" ReportInfo.CreatorVersion="2013.1.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/26/2010 18:08:33" ReportInfo.Modified="12/03/2015 12:55:19" ReportInfo.CreatorVersion="2013.1.4.0">
   <Dictionary>
     <TableDataSource Name="infedence" ReferenceName="Data.infedence" DataType="System.Int32" Enabled="true">
       <Column Name="id" DataType="System.Int64"/>
@@ -21,8 +21,12 @@
       <Column Name="addition" DataType="System.String"/>
       <Column Name="sex" DataType="System.String"/>
       <Column Name="invalidityDate" DataType="System.DateTime"/>
-      <Column Name="invalidityLpzID" DataType="System.Int64"/>
       <Column Name="comission" DataType="System.String"/>
+      <Column Name="headOfDepartment" DataType="System.String"/>
+      <Column Name="mkbCode" DataType="System.String"/>
+      <Column Name="haveInvalidity" DataType="System.Boolean" BindableControl="CheckBox"/>
+      <Column Name="LPZ" DataType="System.String"/>
+      <Column Name="status" DataType="System.Int64"/>
     </TableDataSource>
     <TableDataSource Name="head" ReferenceName="Data.head" DataType="System.Int32" Enabled="true">
       <Column Name="fio" DataType="System.String"/>
@@ -38,9 +42,9 @@
       <TextObject Name="Text6" Left="236.25" Top="103.95" Width="217.35" Height="28.35" Text="Рішення" HorzAlign="Center" Font="Arial, 18pt, style=Bold"/>
     </ReportTitleBand>
     <DataBand Name="patientData" Top="145.75" Width="718.2" Height="75.6" CanGrow="true">
-      <TextObject Name="Text1" Width="274.05" Height="18.9" Text="Протокол № [infedence.number]" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text1" Width="689.85" Height="18.9" Text="Протокол № [infedence.number] від [Replace(ToString([infedence.data]),&quot;0:00:00&quot;,&quot;&quot;)]" Font="Arial, 12pt, style=Bold"/>
       <TextObject Name="Text2" Top="28.35" Width="708.75" Height="18.9" Text="ПІБ: [infedence.FIO], [infedence.birth]р.н" Font="Arial, 12pt"/>
-      <TextObject Name="Text3" Top="47.25" Width="708.75" Height="18.9" GrowToBottom="true" Text="Адреса: [infedence.address],[infedence.town],[Replace([infedence.region],&quot;кий&quot;,&quot;кого&quot;)] району" Font="Arial, 12pt"/>
+      <TextObject Name="Text3" Top="47.25" Width="708.75" Height="18.9" GrowToBottom="true" Text="Адреса: [infedence.address],[infedence.town] [IIf(ToString([infedence.region])==&quot;м.Вінниця&quot;,Replace([infedence.region],&quot;м.Вінниця&quot;,&quot;.&quot;), Replace([infedence.region],&quot;кий&quot;,&quot;кого району&quot;))]&#13;&#10;" Font="Arial, 12pt"/>
     </DataBand>
     <DataBand Name="diagnose" Top="225.35" Width="718.2" Height="28.35" CanGrow="true">
       <TextObject Name="Text7" Width="94.5" Height="28.35" Text="Діагноз:" Font="Arial, 14pt, style=Bold"/>
@@ -50,13 +54,21 @@
       <TextObject Name="Text9" Width="94.5" Height="28.35" Text="Рішення" Font="Arial, 14pt, style=Bold"/>
       <TextObject Name="Text10" Left="94.5" Width="614.25" Height="18.9" CanGrow="true" GrowToBottom="true" Text="[infedence.lkk]" VertAlign="Center"/>
     </DataBand>
-    <DataBand Name="lkkComission" Top="299.5" Width="718.2" Height="47.25" DataSource="head">
+    <DataBand Name="lkkComission" Top="299.5" Width="718.2" Height="47.25" CanGrow="true" DataSource="head">
       <TextObject Name="Text11" Width="113.4" Height="18.9" Text="Голова ЛКК" Font="Arial, 12pt"/>
       <TextObject Name="Text12" Left="160.65" Width="548.1" Height="18.9" Text="[head.fio]" HorzAlign="Right" Font="Arial, 12pt"/>
       <TextObject Name="Text14" Top="28.35" Width="113.4" Height="18.9" CanBreak="false" Text="Члени ЛКК" Font="Arial, 12pt"/>
     </DataBand>
     <DataBand Name="membersLKK" Top="350.75" Width="718.2" Height="18.9" CanGrow="true" DataSource="members">
       <TextObject Name="Text13" Left="160.65" Width="548.1" Height="18.9" CanGrow="true" GrowToBottom="true" Text="[members.fio]" HorzAlign="Right" Font="Arial, 12pt"/>
+    </DataBand>
+    <DataBand Name="Data2" Top="373.65" Width="718.2" Height="37.8" CanGrow="true">
+      <TextObject Name="Text15" Top="18.9" Width="198.45" Height="18.9" CanBreak="false" Text="Завідуючий відділенням" Font="Arial, 12pt"/>
+      <TextObject Name="Text16" Left="274.05" Top="18.9" Width="434.7" Height="18.9" CanBreak="false" Text="[infedence.headOfDepartment]" HorzAlign="Right" Font="Arial, 12pt"/>
+    </DataBand>
+    <DataBand Name="Data1" Top="415.45" Width="718.2" Height="37.8" CanGrow="true">
+      <TextObject Name="Text17" Left="274.05" Top="18.9" Width="434.7" Height="18.9" CanBreak="false" Text="[infedence.doctor]" HorzAlign="Right" Font="Arial, 12pt"/>
+      <TextObject Name="Text18" Top="18.9" Width="198.45" Height="18.9" CanBreak="false" Text="Лікуючий лікар" Font="Arial, 12pt"/>
     </DataBand>
   </ReportPage>
 </Report>

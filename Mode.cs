@@ -18,7 +18,7 @@ namespace LKK
 
         private void Mode_Shown(object sender, EventArgs e)
         {
-            if (Program.status == 1)
+            if (Program.status == 0)
             {
                 modeLkk.Checked = true;
                 modeInsulin.Checked = false;
@@ -34,11 +34,11 @@ namespace LKK
         {
             if (modeLkk.Checked)
             {
-                Program.status = 1;
+                Program.status = 0;
             }
             else
             {
-                Program.status = 0;
+                Program.status = 1;
             }
             Close();
         }

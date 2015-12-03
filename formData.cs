@@ -61,27 +61,33 @@ namespace LKK
             switch (formType)
             {
                 case formTypes.INFERENCELKK:
+                    this.Text = "Висновки ЛКК";
                     formType = formTypes.INFERENCELKK;
                     gridInit();
                     this.Size = new Size(728, 372);
                     break;
                 case formTypes.DOCTORS:
+                    this.Text = "Лікарі";
                     formType = formTypes.DOCTORS;
                     gridInit();          
                     break;
                 case formTypes.DEPARTMENTS:
+                    this.Text = "Відділення";
                     formType = formTypes.DEPARTMENTS;
                     gridInit();
                     break;
                 case formTypes.REGIONS:
+                    this.Text = "Райони";
                     formType = formTypes.REGIONS;
                     gridInit();
                     break;
                case formTypes.DIAGNOSE:
+                    this.Text = "Діагнози";
                     formType = formTypes.DIAGNOSE;
                     gridInit();
                     break;
                case formTypes.MEMBERSLKK:
+                    this.Text = "Комісія ЛКК";
                     formType = formTypes.MEMBERSLKK;
                     gridInit();
                     break;
@@ -123,35 +129,7 @@ namespace LKK
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (actions == formActions.WORK)
-            {
-                if (mainDs.Visible == true && mainDs.Checked == true)
-                {                    
-                    textArea.Text += dataGridView1.CurrentRow.Cells[0].Value.ToString() +" "+dataGridView1.CurrentRow.Cells[1].Value.ToString() + formaText + stadiaText + ". ";
-                    mainDs.Checked = false;                    
-                    lkkMain.setMkb(dataGridView1.CurrentRow.Cells[0].Value.ToString());
-                    
-                }
-                else
-                {
-                    if (formType == formTypes.DIAGNOSE)
-                    {                        
-                        textArea.Text += dataGridView1.CurrentRow.Cells[1].Value.ToString() + formaText + stadiaText + ". ";
-                    }
-                    else
-                        textArea.Text += dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                    formaText = "";
-                    stadiaText = "";
-                    Light.Checked = false;
-                    medium.Checked = false;
-                    hard.Checked = false;
-                    decomp.Checked = false;
-                    subcompens.Checked = false;
-                    medicsubcomp.Checked = false;
-                    //textArea.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                }
-            }
-           
+            addToProtokol();           
         }
 
         private void formData_Load(object sender, EventArgs e)
@@ -164,11 +142,15 @@ namespace LKK
                 this.MaximumSize = new System.Drawing.Size(728, 372);
                 insertButton.Location = new Point(220, 265);
                 modifyButton.Location = new Point(400, 265);
-                deleteButton.Location = new Point(580, 265);
+                if (formType == formTypes.INFERENCELKK && actions == formActions.WORK)                
+                    toLKK.Location = new Point(40, 265);                
+                else
+                    toLKK.Visible = false;
             }
             else
             {
                 formDisease.Visible = true;
+                toLKK.Visible = true;
                 stadia.Visible = true;
                 mainDs.Visible = true;
 
@@ -177,17 +159,17 @@ namespace LKK
 
         private void Light_Click(object sender, EventArgs e)
         {
-            formaText = " легка форма";
+            formaText = " легка форма,";
         }
 
         private void medium_Click(object sender, EventArgs e)
         {
-            formaText = " середньої важкості";
+            formaText = " середньої важкості,";
         }
 
         private void hard_Click(object sender, EventArgs e)
         {
-            formaText = " важка форма";
+            formaText = " важка форма,";
         }
 
         private void decomp_Click(object sender, EventArgs e)
@@ -238,6 +220,9 @@ namespace LKK
                     dataGridView1.Columns[1].HeaderText = "ПІБ";                    
                     dataGridView1.Columns[2].HeaderText = "Голова ЛКК";
                     dataGridView1.Columns[2].Width = 50;
+                    dataGridView1.Columns[3].HeaderText = "Є членом ЛКК";
+                    dataGridView1.Columns[3].Width = 50;
+                    dataGridView1.ReadOnly = false;
                     break;
             }
             dataGridView1.Sort(dataGridView1.Columns[dataGridView1.ColumnCount - 1], ListSortDirection.Ascending); 
@@ -250,7 +235,7 @@ namespace LKK
             {
                 case formTypes.DEPARTMENTS:
                     modifyData.setType(addData.formType.DEPARTMENTS, addData.formAction.MODIFY);
-                    modifyData.setDataToUpdate(dataGridView1.CurrentCell.Value.ToString(), "");
+                    modifyData.setDataToUpdate(dataGridView1.CurrentRow.Cells[0].Value.ToString(),"");
                     modifyData.ShowDialog();
                     gridInit();
                     break;
@@ -311,6 +296,42 @@ namespace LKK
                         break;
                 }
             }
+        }
+        private void addToProtokol()
+        {
+            if (actions == formActions.WORK)
+            {
+                if (mainDs.Visible == true && mainDs.Checked == true)
+                {
+                    textArea.Text += dataGridView1.CurrentRow.Cells[0].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[1].Value.ToString() + formaText + stadiaText + ". ";
+                    mainDs.Checked = false;
+                    lkkMain.setMkb(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+
+                }
+                else
+                {
+                    if (formType == formTypes.DIAGNOSE)
+                    {
+                        textArea.Text += dataGridView1.CurrentRow.Cells[1].Value.ToString() + formaText + stadiaText + ". ";
+                    }
+                    else
+                        textArea.Text += dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                    formaText = "";
+                    stadiaText = "";
+                    Light.Checked = false;
+                    medium.Checked = false;
+                    hard.Checked = false;
+                    decomp.Checked = false;
+                    subcompens.Checked = false;
+                    medicsubcomp.Checked = false;
+                    //textArea.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                }
+            }
+        }
+
+        private void toLKK_Click(object sender, EventArgs e)
+        {
+            addToProtokol();
         }
     }
 }

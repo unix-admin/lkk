@@ -16,7 +16,7 @@ namespace LKK
         {
             InitializeComponent();
             workMode.Text = "Режим роботи: Робота з протоколами ЛКК";
-            Program.status = 1;
+            Program.status = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace LKK
         }
         private void changeModeText()
         {
-            if (Program.status == 0)
+            if (Program.status == 1)
             {
                 workMode.Text = "Режим роботи: Робота з призначенням інсуліну";
             }
@@ -112,6 +112,13 @@ namespace LKK
             members.setFormType(formData.formTypes.MEMBERSLKK);
             members.setFormActions(formData.formActions.VIEW);
             members.ShowDialog();
+        }
+
+        private void aboutSoftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 about = new AboutBox1();
+            about.MdiParent = this;
+            about.Show();
         }
     }
 }

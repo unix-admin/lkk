@@ -30,7 +30,6 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.insertButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
             this.modifyButton = new System.Windows.Forms.Button();
             this.mainDs = new System.Windows.Forms.CheckBox();
             this.formDisease = new System.Windows.Forms.GroupBox();
@@ -41,6 +40,7 @@
             this.medicsubcomp = new System.Windows.Forms.RadioButton();
             this.subcompens = new System.Windows.Forms.RadioButton();
             this.decomp = new System.Windows.Forms.RadioButton();
+            this.toLKK = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.formDisease.SuspendLayout();
             this.stadia.SuspendLayout();
@@ -66,30 +66,19 @@
             // 
             // insertButton
             // 
-            this.insertButton.Location = new System.Drawing.Point(220, 373);
+            this.insertButton.Location = new System.Drawing.Point(448, 373);
             this.insertButton.Name = "insertButton";
-            this.insertButton.Size = new System.Drawing.Size(118, 23);
+            this.insertButton.Size = new System.Drawing.Size(94, 23);
             this.insertButton.TabIndex = 1;
             this.insertButton.Text = "Додати дані";
             this.insertButton.UseVisualStyleBackColor = true;
             this.insertButton.Click += new System.EventHandler(this.insertButton_Click);
             // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(571, 373);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(118, 23);
-            this.deleteButton.TabIndex = 2;
-            this.deleteButton.Text = "Видалити дані";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Visible = false;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
             // modifyButton
             // 
-            this.modifyButton.Location = new System.Drawing.Point(402, 373);
+            this.modifyButton.Location = new System.Drawing.Point(559, 373);
             this.modifyButton.Name = "modifyButton";
-            this.modifyButton.Size = new System.Drawing.Size(118, 23);
+            this.modifyButton.Size = new System.Drawing.Size(101, 23);
             this.modifyButton.TabIndex = 3;
             this.modifyButton.Text = "Змінити дані";
             this.modifyButton.UseVisualStyleBackColor = true;
@@ -102,9 +91,9 @@
             this.mainDs.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mainDs.Location = new System.Drawing.Point(13, 265);
             this.mainDs.Name = "mainDs";
-            this.mainDs.Size = new System.Drawing.Size(161, 17);
+            this.mainDs.Size = new System.Drawing.Size(116, 17);
             this.mainDs.TabIndex = 4;
-            this.mainDs.Text = "Використовувати код МКХ";
+            this.mainDs.Text = "Основний діагноз";
             this.mainDs.UseVisualStyleBackColor = true;
             this.mainDs.Visible = false;
             // 
@@ -206,16 +195,26 @@
             this.decomp.UseVisualStyleBackColor = true;
             this.decomp.Click += new System.EventHandler(this.decomp_Click);
             // 
+            // toLKK
+            // 
+            this.toLKK.Location = new System.Drawing.Point(196, 373);
+            this.toLKK.Name = "toLKK";
+            this.toLKK.Size = new System.Drawing.Size(124, 23);
+            this.toLKK.TabIndex = 7;
+            this.toLKK.Text = "Додати до пртоколу";
+            this.toLKK.UseVisualStyleBackColor = true;
+            this.toLKK.Click += new System.EventHandler(this.toLKK_Click);
+            // 
             // formData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(712, 410);
+            this.Controls.Add(this.toLKK);
             this.Controls.Add(this.stadia);
             this.Controls.Add(this.formDisease);
             this.Controls.Add(this.mainDs);
             this.Controls.Add(this.modifyButton);
-            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.insertButton);
             this.Controls.Add(this.dataGridView1);
             this.MaximizeBox = false;
@@ -239,7 +238,6 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button insertButton;
-        private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button modifyButton;
         private System.Windows.Forms.CheckBox mainDs;
         private System.Windows.Forms.GroupBox formDisease;
@@ -250,5 +248,6 @@
         private System.Windows.Forms.RadioButton medicsubcomp;
         private System.Windows.Forms.RadioButton subcompens;
         private System.Windows.Forms.RadioButton decomp;
+        private System.Windows.Forms.Button toLKK;
     }
 }

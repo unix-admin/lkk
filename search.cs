@@ -25,8 +25,8 @@ namespace LKK
         }
         private void initSearchData()
         {
-            searchData.dateBegin = null;
-            searchData.dateEnd = null;
+            searchData.dateBegin = Convert.ToDateTime("01.01.1900");
+            searchData.dateEnd = Convert.ToDateTime("01.01.1900");
             searchData.ageStart = null;
             searchData.ageEnd = null;
             searchData.fio = null;
@@ -41,8 +41,8 @@ namespace LKK
         {
             if (lkkDateBox.Checked)
             {
-                searchData.dateBegin = startLKKdate.Value.ToString("yyyy-MM-dd");
-                searchData.dateEnd = endLKKDate.Value.ToString("yyyy-MM-dd");
+                searchData.dateBegin = startLKKdate.Value.Date;
+                searchData.dateEnd = endLKKDate.Value.Date;
             }
             if (Surname.Checked)
             {

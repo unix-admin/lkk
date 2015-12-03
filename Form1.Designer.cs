@@ -60,7 +60,7 @@
             this.workMode});
             this.statusStrip1.Location = new System.Drawing.Point(0, 239);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(284, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(419, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -79,7 +79,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(419, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -195,6 +195,7 @@
             this.administerToolStripMenuItem.Name = "administerToolStripMenuItem";
             this.administerToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.administerToolStripMenuItem.Text = "Адміністрування";
+            this.administerToolStripMenuItem.Visible = false;
             // 
             // backupToolStripMenuItem
             // 
@@ -220,27 +221,27 @@
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutSoftToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.aboutToolStripMenuItem.Text = "about";
-            this.aboutToolStripMenuItem.Visible = false;
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.aboutToolStripMenuItem.Text = "Про програму";
             // 
             // aboutSoftToolStripMenuItem
             // 
             this.aboutSoftToolStripMenuItem.Name = "aboutSoftToolStripMenuItem";
-            this.aboutSoftToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.aboutSoftToolStripMenuItem.Text = "aboutSoft";
+            this.aboutSoftToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.aboutSoftToolStripMenuItem.Text = "Про програму";
+            this.aboutSoftToolStripMenuItem.Click += new System.EventHandler(this.aboutSoftToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(419, 261);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "АРМ комісії ЛКК";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

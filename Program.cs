@@ -29,8 +29,8 @@ namespace LKK
 
     public struct lkkSearchData
     {
-        public string dateBegin;
-        public string dateEnd;
+        public DateTime dateBegin;
+        public DateTime dateEnd;
         public string fio;
         public string ageStart;
         public string ageEnd;

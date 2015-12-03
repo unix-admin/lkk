@@ -30,12 +30,12 @@ namespace LKK
         }
         private formType type;
         private formAction action;        
-        private ComboBox townTypes = new ComboBox();
+        private ComboBox dynamicComboBox = new ComboBox();
         private TextBox mkbCodeText = new TextBox();
         private CheckBox isOrphanBox = new CheckBox();
-        private Label mkbLabel = new Label();
+        private Label dynamicLabel = new Label();
         private Label orphanLabel = new Label();
-
+        private DataTable comboBoxItems = new DataTable();
         private string regionID;
         private string dataToUpdate;
         private string typeTownToUpdate;
@@ -48,11 +48,13 @@ namespace LKK
         {
             regionID = ID;
         }
-        public void setDataToUpdate(string data, string townType)
+        public void setDataToUpdate(string data, string value)
         {
+           
             dataToUpdate = data;
             valueToEdit.Text = data;
-            typeTownToUpdate = townType;
+            typeTownToUpdate = value;
+           
         }
         //For Diagnose only
         public void setDataToUpdate(string mkbCode, string diagnose, bool isOrphan)
@@ -68,46 +70,66 @@ namespace LKK
         {
             type = formTypes;            
             action = formActions;
-        }
+        }        
 
         private void addData_Load(object sender, EventArgs e)
         {
             switch (type)
             {
-                case formType.TOWNS:                    
-                    townTypes.Name = "townType";
-                    townTypes.Items.Add("");
-                    townTypes.Items.Add("м");
-                    townTypes.Items.Add("с");
-                    townTypes.Items.Add("смт");
-                    townTypes.Items.Add("ст");
-                    townTypes.DropDownStyle = ComboBoxStyle.DropDownList;
-                    townTypes.Location = new System.Drawing.Point(12, 39);
-                    townTypes.Size = new System.Drawing.Size(50, 20);
-                    townTypes.TabIndex = 0;
+                case formType.TOWNS:
+                    this.Text = "Населені пункти";
+                    dynamicComboBox.Name = "townType";
+                    dynamicComboBox.Items.Add("");
+                    dynamicComboBox.Items.Add("м");
+                    dynamicComboBox.Items.Add("с");
+                    dynamicComboBox.Items.Add("смт");
+                    dynamicComboBox.Items.Add("ст");
+                    dynamicComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+                    dynamicComboBox.Location = new System.Drawing.Point(12, 39);
+                    dynamicComboBox.Size = new System.Drawing.Size(50, 20);
+                    dynamicComboBox.TabIndex = 0;
                     this.valueToEdit.Location = new System.Drawing.Point(70, 39);
                     this.valueToEdit.Size = new System.Drawing.Size(380, 20);
                     this.valueToEdit.TabIndex = 1;
-                    this.Controls.Add(townTypes);
+                    this.Controls.Add(dynamicComboBox);
                     nameValue.Text = "Населений пункт";
                     break;
                 case formType.DEPARTMENTS:
+                    this.Text = "Відділення";
                     nameValue.Text = "Відділення";
+                    dynamicComboBox.Size = new Size(162, 20);
+                    dynamicComboBox.Sorted = true;
+                    dynamicComboBox.Location = new Point(293, 39);
+                    dynamicLabel.Location = new Point(293, 9);
+                    dynamicLabel.Text = "Зав. відділенням";
+                    this.Controls.Add(dynamicComboBox);
+                    this.Controls.Add(dynamicLabel);
+                    this.valueToEdit.Size = new Size(274, 20);
+                    dynamicComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+                    dynamicComboBox.DataSource = lkk.getDoctors();
+                    dynamicComboBox.DisplayMember = "fio";
+                    if (action == formAction.MODIFY)
+                        dynamicComboBox.SelectedIndex = dynamicComboBox.FindString(lkk.getHeadOfDepartment(dataToUpdate));
                     break;
                 case formType.DIAGNOSE:
+                    this.Text = "Діагноз";
                     nameValue.Text = "Діагноз";
                     repaintToDiagnoseForm();
                     break;
                 case formType.DOCTORS:
+                    this.Text = "Лікарі";
                     nameValue.Text = "ПІБ Лікаря";
                     break;
                 case formType.INFERENCELKK:
+                    this.Text = "Висновки ЛКК";
                     nameValue.Text = "Висновки ЛКК";
                     break;
                 case formType.REGIONS:
+                    this.Text = "Райони";
                     nameValue.Text = "Район";
                     break;
                 case formType.LPZ:
+                    this.Text = "Лікувально - профілактичні заклади";
                     nameValue.Text = "Лікувально-профілактичний заклад";
                     break;
             }
@@ -121,7 +143,7 @@ namespace LKK
                     switch (type)
                     {
                         case formType.DEPARTMENTS:
-                            lkk.addData(Database.typesData.department, valueToEdit.Text);                            
+                            lkk.addData(valueToEdit.Text, dynamicComboBox.Text);                            
                             break;
                         case formType.DIAGNOSE:
                             lkk.addData(mkbCodeText.Text, valueToEdit.Text, isOrphanBox.Checked);
@@ -136,7 +158,7 @@ namespace LKK
                             lkk.addData(Database.typesData.region,valueToEdit.Text);
                             break;
                         case formType.TOWNS:
-                            lkk.addTown(townTypes.Text,regionID,valueToEdit.Text);
+                            lkk.addTown(dynamicComboBox.Text, regionID, valueToEdit.Text);
                             break;
                         case formType.LPZ:
                             lkk.addData(Database.typesData.lpz, valueToEdit.Text);
@@ -148,7 +170,7 @@ namespace LKK
                         switch (type)
                         {
                             case formType.DEPARTMENTS:
-                                lkk.updateData(Database.typesData.department,dataToUpdate, valueToEdit.Text);
+                                lkk.updateData(dataToUpdate, valueToEdit.Text, dynamicComboBox.Text);                                
                                 break;
                             case formType.DIAGNOSE:
                                 lkk.updateData(Database.typesData.diagnose, dataToUpdate, valueToEdit.Text);
@@ -163,7 +185,7 @@ namespace LKK
                                 lkk.updateData(Database.typesData.region, dataToUpdate, valueToEdit.Text);
                                 break;
                             case formType.TOWNS:
-                                lkk.updateData(regionID, typeTownToUpdate, townTypes.Text, dataToUpdate, valueToEdit.Text);
+                                lkk.updateData(regionID, typeTownToUpdate, dynamicComboBox.Text, dataToUpdate, valueToEdit.Text);
                                 break;
                         }
                         break;
@@ -181,14 +203,14 @@ namespace LKK
             this.Controls.Add(mkbCodeText);
             this.Controls.Add(isOrphanBox);
             this.Controls.Add(orphanLabel);
-            this.Controls.Add(mkbLabel);
+            this.Controls.Add(dynamicLabel);
             mkbCodeText.Location = new Point(12, 39);
             mkbCodeText.Size = new Size(58, 20);
             valueToEdit.Location = new Point(77, 39);
             valueToEdit.Size = new Size(347, 20);
             isOrphanBox.Location = new Point(440, 39);
-            mkbLabel.Location = new Point(12, 9);
-            mkbLabel.Text = "Код МКХ";
+            dynamicLabel.Location = new Point(12, 9);
+            dynamicLabel.Text = "Код МКХ";
             orphanLabel.Location = new Point(407, 9);
             orphanLabel.Text = "Орфанне";                             
         }
