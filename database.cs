@@ -38,6 +38,24 @@ namespace LKK
             public DateTime InvalidityDate;
             public string LPZ;
         };
+        public struct invalidityData
+        {
+            public string fio;
+            public string sex;
+            public DateTime dateBirth;
+            public string age;
+            public string region;
+            public string town;
+            public string address;
+            public string addressWork;
+            public string position;
+            public string LPZ;
+            public DateTime InvalidityDate;
+            public string mkbCode;
+            public string diagnose;
+            public string addition;
+            public string invalidityGroupe;
+        };
 
         public void Dispose()
         {
@@ -54,7 +72,9 @@ namespace LKK
            ,lkk
            ,lpz
            ,mkbcode
+           ,invalidityGroupe
            ,headOfDepartment
+            ,invalidityRedister
         };
 
         private SQLiteConnection connection;
@@ -200,7 +220,15 @@ namespace LKK
        private string getMembersLkkToInsert()
        {
            string members = null;
-           DataTable membersLkk = getMembersLkk();
+           DataTable membersLkk = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT id,fio,head FROM members WHERE active=1 ORDER BY members.head DESC";
+           connect();
+           data.SelectCommand = selectData;
+           data.Fill(membersLkk);
+           disconnect();
            
            for (int i = 0; i < membersLkk.Rows.Count; i++)
            {
@@ -290,6 +318,20 @@ namespace LKK
            return lpz;
        }
 
+       public DataTable getInvalidityGroups()
+       {
+           DataTable groupe = new DataTable();
+           SQLiteDataAdapter data = new SQLiteDataAdapter();
+           SQLiteCommand selectData = new SQLiteCommand();
+           selectData.Connection = connection;
+           selectData.CommandText = "SELECT groupe FROM invalidityGroups";
+           data.SelectCommand = selectData;
+           connect();
+           data.Fill(groupe);
+           disconnect();
+           return groupe;
+       }
+
        public DataTable getRegions()
        {
            DataTable regions = new DataTable();
@@ -305,7 +347,7 @@ namespace LKK
        }
        
        private SQLiteDataReader reader;
-       private string getID(string parameter, typesData type)
+       public string getID(string parameter, typesData type)
        {
            string ID;
            ID = "";
@@ -331,6 +373,9 @@ namespace LKK
                    break;
                case typesData.headOfDepartment:
                    selectSQLCommand.CommandText = "SELECT headOfDepartment FROM departments WHERE id =:parameter";
+                   break;
+               case typesData.invalidityGroupe:
+                   selectSQLCommand.CommandText = "SELECT id FROM invalidityGroups WHERE groupe =:parameter";
                    break;
 
            }
@@ -516,13 +561,13 @@ namespace LKK
 
        public void addTown(string type, string regionID, string value)
        {
-           insertSQLCommand.CommandText = "INSERT INTO towns (type, regionID, title) VALUES(:type, :regionID, :title)";
+           insertSQLCommand.CommandText = "INSERT INTO towns (type, regionID, town) VALUES(:type, :regionID, :title)";
            insertSQLCommand.Parameters.Add(":type", DbType.String);
            insertSQLCommand.Parameters[":type"].Value = type;
            insertSQLCommand.Parameters.Add(":regionID", DbType.String);
-           insertSQLCommand.Parameters[":regionID"].Value = type;
+           insertSQLCommand.Parameters[":regionID"].Value = regionID;
            insertSQLCommand.Parameters.Add(":title", DbType.String);
-           insertSQLCommand.Parameters[":title"].Value = type;
+           insertSQLCommand.Parameters[":title"].Value = value;
            connect();
            insertSQLCommand.ExecuteNonQuery();
            disconnect();
@@ -606,7 +651,7 @@ namespace LKK
                    updateSQLCommand.CommandText = "SELECT count() FROM doctors WHERE id=:id";
                    break;
                case typesData.lkk:
-                   updateSQLCommand.CommandText = "SELECT count() FROM lkk WHERE id=:id";
+                   updateSQLCommand.CommandText = "UPDATE lkk SET deleted=0 WHERE id=:id";
                    break;
                case typesData.region:
                    updateSQLCommand.CommandText = "SELECT count() FROM regions WHERE id=:id";
@@ -664,33 +709,38 @@ namespace LKK
             disconnect();
         }
 
-        private void setDeleted(typesData typeData, string id)
+        public void setDeleted(typesData typeData, string id)
         {
+            SQLiteCommand deleteData = new SQLiteCommand();
+            deleteData.Connection = connection;
             switch (typeData)
             {
                 case typesData.department:
-                    deleteSQLCommand.CommandText = "UPDATE departments SET deleted='true' WHERE id=:id";
+                    deleteData.CommandText = "UPDATE departments SET deleted='1' WHERE id=:id";
                     break;
                 case typesData.diagnose:
-                    deleteSQLCommand.CommandText = "UPDATE diagnosis SET deleted='true' WHERE id=:id";
+                    deleteData.CommandText = "UPDATE diagnosis SET deleted='1' WHERE id=:id";
                     break;
                 case typesData.doctor:
-                    deleteSQLCommand.CommandText = "UPDATE doctors SET deleted='true' WHERE id=:id";
+                    deleteData.CommandText = "UPDATE doctors SET deleted='1' WHERE id=:id";
                     break;
                 case typesData.lkk:
-                    deleteSQLCommand.CommandText = "UPDATE lkk SET deleted='true' WHERE id=:id";
+                    deleteData.CommandText = "UPDATE lkk SET deleted='1' WHERE id=:id";
                     break;
                 case typesData.region:
-                    deleteSQLCommand.CommandText = "UPDATE regions SET deleted='true' WHERE id=:id";
+                    deleteData.CommandText = "UPDATE regions SET deleted='true' WHERE id=:id";
                     break;
                 case typesData.town:
-                    deleteSQLCommand.CommandText = "UPDATE towns SET deleted='true' WHERE id=:id";
+                    deleteData.CommandText = "UPDATE towns SET deleted='1' WHERE id=:id";
+                    break;
+                case typesData.invalidityRedister:
+                    deleteData.CommandText = "UPDATE invalidity SET deleted='1' WHERE id=:id";
                     break;
             }
             connect();
-            deleteSQLCommand.Parameters.Add(":id", DbType.String);
-            deleteSQLCommand.Parameters[":id"].Value = id;
-            deleteSQLCommand.ExecuteNonQuery();
+            deleteData.Parameters.Add(":id", DbType.String);
+            deleteData.Parameters[":id"].Value = id;
+            deleteData.ExecuteNonQuery();
             disconnect();
         }
         public DataSet getInfedenceLKK(string id)
@@ -739,7 +789,7 @@ namespace LKK
             SQLiteDataAdapter adapter = new SQLiteDataAdapter();
             adapter.SelectCommand = selectData;
             selectData.Connection = connection;
-            selectData.CommandText = "SELECT * FROM infedenceView WHERE status=:status ";
+            selectData.CommandText = "SELECT * FROM infedenceView WHERE deleted='0' AND status='0'";
             selectData.Parameters.Add(":status", DbType.Int32);
             selectData.Parameters[":status"].Value = Program.status;
             if (data.dateBegin != Convert.ToDateTime("01.01.1900") && data.dateEnd != Convert.ToDateTime("01.01.1900"))
@@ -751,8 +801,8 @@ namespace LKK
                     selectData.Parameters[":dataStart"].Value = data.dateBegin;
                     selectData.Parameters[":dataEnd"].Value = data.dateEnd;
                 
-            }                                    
-            if (data.fio != null)
+            }
+            if (data.fio.Trim() !="")
             {
                 selectData.CommandText += " AND fio=:fio ";                
                 selectData.Parameters.Add(":fio", DbType.String);
@@ -839,6 +889,7 @@ namespace LKK
             reader = null;
             return result;
         }
+
         public void updateData(lkkData data, string id)
         {
             updateSQLCommand.CommandText = "UPDATE lkk SET data=:data, number=:number, departmentID=:departmentID, headOfDepartment=:headOfDepartment, doctorID=:doctorID,FIO=:FIO, " +
@@ -912,6 +963,189 @@ namespace LKK
 
             disconnect();
         }
+
+
+        public void insertInvalidityData(invalidityData data)
+        {
+            insertSQLCommand.CommandText = "INSERT INTO invalidity (fio,sex,dateBirth,age,region_id,town_id,address,addressWork,position,lpz_id,invalidityDate,mkbCode,diagnose,addition,groupe)" +
+               "VALUES(:fio,:sex,:dateBirth,:age,:region_id,:town_id,:address,:addressWork,:position,:lpz_id,:invalidityDate,:mkbCode,:diagnose,:addition,:groupe);";
+            insertSQLCommand.Parameters.Add(":fio", DbType.String);
+            insertSQLCommand.Parameters[":fio"].Value = data.fio;
+            insertSQLCommand.Parameters.Add(":sex", DbType.String);
+            insertSQLCommand.Parameters[":sex"].Value = data.sex;
+            insertSQLCommand.Parameters.Add(":dateBirth", DbType.Date);
+            insertSQLCommand.Parameters[":dateBirth"].Value = data.dateBirth;
+            insertSQLCommand.Parameters.Add(":age", DbType.String);
+            insertSQLCommand.Parameters[":age"].Value = data.age;
+            insertSQLCommand.Parameters.Add(":region_id", DbType.String);
+            insertSQLCommand.Parameters[":region_id"].Value = getID(data.region, typesData.region);
+            insertSQLCommand.Parameters.Add(":town_id", DbType.String);
+            insertSQLCommand.Parameters[":town_id"].Value = getID(insertSQLCommand.Parameters[":region_id"].Value.ToString(), data.town);
+            insertSQLCommand.Parameters.Add(":address", DbType.String);
+            insertSQLCommand.Parameters[":address"].Value = data.address;
+            insertSQLCommand.Parameters.Add(":addressWork", DbType.String);
+            insertSQLCommand.Parameters[":addressWork"].Value = data.addressWork;
+            insertSQLCommand.Parameters.Add(":position", DbType.String);
+            insertSQLCommand.Parameters[":position"].Value = data.position;
+            insertSQLCommand.Parameters.Add(":lpz_id", DbType.String);
+            insertSQLCommand.Parameters[":lpz_id"].Value = getID(data.LPZ, typesData.lpz);
+            insertSQLCommand.Parameters.Add(":invalidityDate", DbType.Date);
+            insertSQLCommand.Parameters[":invalidityDate"].Value = data.InvalidityDate;
+            insertSQLCommand.Parameters.Add(":mkbCode", DbType.String);
+            insertSQLCommand.Parameters[":mkbCode"].Value = data.mkbCode;
+            insertSQLCommand.Parameters.Add(":diagnose", DbType.String);
+            insertSQLCommand.Parameters[":diagnose"].Value = data.diagnose;
+            insertSQLCommand.Parameters.Add(":addition", DbType.String);
+            insertSQLCommand.Parameters[":addition"].Value = data.addition;
+            insertSQLCommand.Parameters.Add(":groupe", DbType.String);
+            insertSQLCommand.Parameters[":groupe"].Value = getID(data.invalidityGroupe, typesData.invalidityGroupe);
+            connect();
+            insertSQLCommand.ExecuteNonQuery();
+            disconnect();
+
+        }
+
+
+        public DataTable selectInvalidity(invaliditySearchData data)
+        {
+
+            DataTable searchResult = new DataTable();
+            SQLiteCommand selectData = new SQLiteCommand();
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter();
+            adapter.SelectCommand = selectData;
+            selectData.Connection = connection;
+            selectData.CommandText = "SELECT id, fio, dateBirth, age, region, town, address, diagnose, groupe, invalidityDate, sex FROM invalidityView WHERE deleted=0";
+            if (data.fio.Trim() != null && data.fio.Trim() !="")
+            {
+                selectData.CommandText += " AND fio=:fio ";                
+                selectData.Parameters.Add(":fio", DbType.String);
+                selectData.Parameters[":fio"].Value = data.fio;
+            }
+            if (data.ageStart != null)
+            {
+                selectData.CommandText += " AND age>=:startAge AND age <=:endAge ";
+                selectData.Parameters.Add(":startAge", DbType.String);
+                selectData.Parameters.Add(":endAge", DbType.String);
+                selectData.Parameters[":startAge"].Value = data.ageStart;
+                selectData.Parameters[":endAge"].Value = data.ageEnd; 
+            }
+            if (data.region != null)
+            {
+                selectData.CommandText += " AND region=:region ";
+                selectData.Parameters.Add(":region", DbType.String);
+                selectData.Parameters[":region"].Value = data.region;
+            }
+            if (data.diagnose != null)
+            {
+                selectData.CommandText += " AND mkbCode=:mkbCode ";
+                selectData.Parameters.Add(":mkbCode", DbType.String);
+                selectData.Parameters[":mkbCode"].Value = getID(data.diagnose, typesData.mkbcode);
+            }
+            if (data.lpz != null)
+            {
+                selectData.CommandText += " AND LPZ=:lpz ";
+                selectData.Parameters.Add(":lpz", DbType.String);
+                selectData.Parameters[":lpz"].Value = data.lpz;
+            }
+            if (data.excludeTill18) 
+            {
+                selectData.CommandText += " AND dateBirth >:birth";
+                selectData.Parameters.Add(":birth", DbType.DateTime);
+                selectData.Parameters[":birth"].Value = DateTime.Now.AddYears(-18).Date;                
+                
+            }
+            if (data.orphanDiseases)
+            {
+                selectData.CommandText += " AND mkbCode IN (SELECT diagnosis.codeMKB FROM diagnosis WHERE diagnosis.isOrphan = 1) ";                
+            }
+            if (data.working) 
+            {
+                selectData.CommandText += " AND position =''";
+            }
+
+            connect();
+            adapter.Fill(searchResult);
+            disconnect();
+            return searchResult;     
+        }
+
+        public invalidityData selectinvalidity(string id)
+        {
+            invalidityData result = new invalidityData();
+            SQLiteCommand selectData = new SQLiteCommand();
+            SQLiteDataReader reader = null;
+            selectData.Connection = connection;
+            selectData.CommandText = "SELECT fio, sex, dateBirth, age, region, town, address, addressWork, position, lpz, invalidityDate, groupe, mkbCode, diagnose,"
+                                    +" addition FROM invalidityView WHERE id=:id";
+            selectData.Parameters.Add(":id", DbType.String);
+            selectData.Parameters[":id"].Value = id;
+            connect();
+            reader = selectData.ExecuteReader();
+            if (reader.Read())
+            {
+                result.fio = reader["fio"].ToString();
+                result.sex = reader["sex"].ToString();
+                result.dateBirth = Convert.ToDateTime(reader["dateBirth"].ToString());
+                result.age = reader["age"].ToString();
+                result.region = reader["region"].ToString();
+                result.town = reader["town"].ToString();
+                result.address = reader["address"].ToString();
+                result.addressWork = reader["addressWork"].ToString();
+                result.position = reader["position"].ToString();
+                result.LPZ = reader["lpz"].ToString();
+                result.InvalidityDate = Convert.ToDateTime(reader["invalidityDate"].ToString());
+                result.invalidityGroupe = reader["groupe"].ToString();
+                result.mkbCode = reader["mkbCode"].ToString();
+                result.diagnose = reader["diagnose"].ToString();
+                result.addition = reader["addition"].ToString();
+            }
+            reader.Close();
+            reader = null;
+            return result;
+        }
+
+        public void updateINdalidityData(invalidityData data, string id)
+        {
+            updateSQLCommand.CommandText = "UPDATE invalidity SET fio=:fio,sex=:sex,dateBirth=:dateBirth,age=:age,region_id=:region_id,town_id=:town_id,address=:town_id,"
+                                            + "addressWork=:addressWork,position=:position,lpz_id=:lpz_id,invalidityDate=:invalidityDate,mkbCode=:mkbCode,diagnose=:diagnose"
+                                            + ",addition=:addition,groupe=:groupe WHERE id=:id;";
+            updateSQLCommand.Parameters.Add(":id", DbType.String);
+            updateSQLCommand.Parameters[":id"].Value = id;
+            updateSQLCommand.Parameters.Add(":fio", DbType.String);
+            updateSQLCommand.Parameters[":fio"].Value = data.fio;
+            updateSQLCommand.Parameters.Add(":sex", DbType.String);
+            updateSQLCommand.Parameters[":sex"].Value = data.sex;
+            updateSQLCommand.Parameters.Add(":dateBirth", DbType.Date);
+            updateSQLCommand.Parameters[":dateBirth"].Value = data.dateBirth;
+            updateSQLCommand.Parameters.Add(":age", DbType.String);
+            updateSQLCommand.Parameters[":age"].Value = data.age;
+            updateSQLCommand.Parameters.Add(":region_id", DbType.String);
+            updateSQLCommand.Parameters[":region_id"].Value = getID(data.region, typesData.region);
+            updateSQLCommand.Parameters.Add(":town_id", DbType.String);
+            updateSQLCommand.Parameters[":town_id"].Value = getID(updateSQLCommand.Parameters[":region_id"].Value.ToString(), data.town);
+            updateSQLCommand.Parameters.Add(":address", DbType.String);
+            updateSQLCommand.Parameters[":address"].Value = data.address;
+            updateSQLCommand.Parameters.Add(":addressWork", DbType.String);
+            updateSQLCommand.Parameters[":addressWork"].Value = data.addressWork;
+            updateSQLCommand.Parameters.Add(":position", DbType.String);
+            updateSQLCommand.Parameters[":position"].Value = data.position;
+            updateSQLCommand.Parameters.Add(":lpz_id", DbType.String);
+            updateSQLCommand.Parameters[":lpz_id"].Value = getID(data.LPZ, typesData.lpz);
+            updateSQLCommand.Parameters.Add(":invalidityDate", DbType.Date);
+            updateSQLCommand.Parameters[":invalidityDate"].Value = data.InvalidityDate;
+            updateSQLCommand.Parameters.Add(":mkbCode", DbType.String);
+            updateSQLCommand.Parameters[":mkbCode"].Value = data.mkbCode;
+            updateSQLCommand.Parameters.Add(":diagnose", DbType.String);
+            updateSQLCommand.Parameters[":diagnose"].Value = data.diagnose;
+            updateSQLCommand.Parameters.Add(":addition", DbType.String);
+            updateSQLCommand.Parameters[":addition"].Value = data.addition;
+            updateSQLCommand.Parameters.Add(":groupe", DbType.String);
+            updateSQLCommand.Parameters[":groupe"].Value = getID(data.invalidityGroupe, typesData.invalidityGroupe);
+            connect();
+            updateSQLCommand.ExecuteNonQuery();
+            disconnect();
+        }
+
 
     }
 }

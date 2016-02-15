@@ -41,5 +41,18 @@ namespace LKK
         public bool orphanDiseases;
     };
 
+    public struct invaliditySearchData
+    {
+        public bool working;        
+        public string fio;
+        public string ageStart;
+        public string ageEnd;
+        public string region;
+        public string diagnose;
+        public string lpz;
+        public bool excludeTill18;
+        public bool orphanDiseases;
+    };
+
 
 }

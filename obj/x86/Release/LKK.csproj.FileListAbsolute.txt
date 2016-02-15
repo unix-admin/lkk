@@ -48,3 +48,4 @@ d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\x86\Release\LKK.Tru
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\x86\Release\LKK.exe.manifest
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\x86\Release\LKK.application
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\x86\Release\LKK.csprojResolveAssemblyReference.cache
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\x86\Release\LKK.invalidityRegister.resources

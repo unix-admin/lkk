@@ -48,3 +48,4 @@ d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.TrustInfo
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.exe.manifest
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.application
 d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.csprojResolveAssemblyReference.cache
+d:\Profile\documents\visual studio 2012\Projects\LKK\LKK\obj\Debug\LKK.invalidityRegister.resources

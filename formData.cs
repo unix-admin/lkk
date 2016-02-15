@@ -305,7 +305,14 @@ namespace LKK
                 {
                     textArea.Text += dataGridView1.CurrentRow.Cells[0].Value.ToString() + " " + dataGridView1.CurrentRow.Cells[1].Value.ToString() + formaText + stadiaText + ". ";
                     mainDs.Checked = false;
-                    lkkMain.setMkb(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                    if (Program.status == 0)
+                    {
+                        lkkMain.setMkb(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                    }
+                    else
+                    {
+                        invalidityRegister.setMkb(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                    }
 
                 }
                 else

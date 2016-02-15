@@ -17,13 +17,20 @@ namespace LKK
             rep = dataToReport.getInfedenceLKK (id);
             Report infedence = new Report();
             infedence.Load("infedence.frx");
-            infedence.RegisterData(rep);            
+            infedence.RegisterData(rep);
             infedence.Show();
         }
         public void showReportLKK(string id, DataTable results)
         {            
             Report reportLKK = new Report();
-            reportLKK.Load("report.frx");
+            if (Program.status == 0)
+            {
+                reportLKK.Load("report.frx");
+            }
+            else 
+            {
+                reportLKK.Load("register.frx");
+            }
             reportLKK.RegisterData(results, "resultData");
             if (id != "")                            
             {
@@ -31,7 +38,7 @@ namespace LKK
                 dataBand.Filter = "[resultData.id]==" + id;
                 
             }            
-            reportLKK.Show();            
+            reportLKK.Show();                        
         }   
 
     }

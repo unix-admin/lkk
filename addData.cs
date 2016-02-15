@@ -39,15 +39,18 @@ namespace LKK
         private string regionID;
         private string dataToUpdate;
         private string typeTownToUpdate;
-        
+
+        public void setRegionID(string regionname)
+        {
+            regionID = lkk.getID(regionname, Database.typesData.region);
+            
+        }
+
         public addData()
         {
             InitializeComponent();
         }
-        private void setRegionID(string ID)
-        {
-            regionID = ID;
-        }
+      
         public void setDataToUpdate(string data, string value)
         {
            

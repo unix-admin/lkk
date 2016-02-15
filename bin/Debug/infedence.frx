@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="02/26/2010 18:08:33" ReportInfo.Modified="12/03/2015 12:55:19" ReportInfo.CreatorVersion="2013.1.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/26/2010 18:08:33" ReportInfo.Modified="12/17/2015 14:32:33" ReportInfo.CreatorVersion="2013.1.4.0">
   <Dictionary>
     <TableDataSource Name="infedence" ReferenceName="Data.infedence" DataType="System.Int32" Enabled="true">
       <Column Name="id" DataType="System.Int64"/>
@@ -27,6 +27,7 @@
       <Column Name="haveInvalidity" DataType="System.Boolean" BindableControl="CheckBox"/>
       <Column Name="LPZ" DataType="System.String"/>
       <Column Name="status" DataType="System.Int64"/>
+      <Column Name="deleted" DataType="System.Boolean" BindableControl="CheckBox"/>
     </TableDataSource>
     <TableDataSource Name="head" ReferenceName="Data.head" DataType="System.Int32" Enabled="true">
       <Column Name="fio" DataType="System.String"/>
@@ -44,7 +45,7 @@
     <DataBand Name="patientData" Top="145.75" Width="718.2" Height="75.6" CanGrow="true">
       <TextObject Name="Text1" Width="689.85" Height="18.9" Text="Протокол № [infedence.number] від [Replace(ToString([infedence.data]),&quot;0:00:00&quot;,&quot;&quot;)]" Font="Arial, 12pt, style=Bold"/>
       <TextObject Name="Text2" Top="28.35" Width="708.75" Height="18.9" Text="ПІБ: [infedence.FIO], [infedence.birth]р.н" Font="Arial, 12pt"/>
-      <TextObject Name="Text3" Top="47.25" Width="708.75" Height="18.9" GrowToBottom="true" Text="Адреса: [infedence.address],[infedence.town] [IIf(ToString([infedence.region])==&quot;м.Вінниця&quot;,Replace([infedence.region],&quot;м.Вінниця&quot;,&quot;.&quot;), Replace([infedence.region],&quot;кий&quot;,&quot;кого району&quot;))]&#13;&#10;" Font="Arial, 12pt"/>
+      <TextObject Name="Text3" Top="47.25" Width="708.75" Height="18.9" GrowToBottom="true" Text="Адреса: [IIf([infedence.town]==&quot;м.Вінниця&quot;,&quot;&quot;,[infedence.town]+&quot;,&quot;)] [Replace([infedence.region],&quot;ий&quot;,&quot;ого району&quot;)], [infedence.address]" Font="Arial, 12pt"/>
     </DataBand>
     <DataBand Name="diagnose" Top="225.35" Width="718.2" Height="28.35" CanGrow="true">
       <TextObject Name="Text7" Width="94.5" Height="28.35" Text="Діагноз:" Font="Arial, 14pt, style=Bold"/>

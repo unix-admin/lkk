@@ -207,7 +207,9 @@ namespace LKK
         {
             addData townAdd = new addData();
             townAdd.setType(addData.formType.TOWNS, addData.formAction.ADD);
+            townAdd.setRegionID(this.region.Text);
             townAdd.ShowDialog();
+            getTown();
 
         }
 
@@ -257,8 +259,9 @@ namespace LKK
             addData lpzAdd = new addData();
             lpzAdd.setType(addData.formType.LPZ, addData.formAction.ADD);
             lpzAdd.ShowDialog();
-            doctor.DataSource = lkkData.getLPZ();
-            doctor.DisplayMember = "title";
+            LPZ.DataSource = lkkData.getLPZ();
+            LPZ.DisplayMember = "title";
+            
         }
 
         private void lkkMain_Shown(object sender, EventArgs e)

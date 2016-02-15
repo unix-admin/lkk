@@ -33,9 +33,20 @@ namespace LKK
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lkkMain insertData = new lkkMain();
-            insertData.MdiParent = this;
-            insertData.Show();
+            
+            switch (Program.status){
+                case 0:
+                    lkkMain insertData = new lkkMain();
+                    insertData.MdiParent = this;
+                    insertData.Show();
+                    break;
+                case 1:
+                    invalidityRegister insertRegister = new invalidityRegister();
+                    insertRegister.MdiParent = this;
+                    insertRegister.Show();
+                    break;
+        }
+            
 
         }
 
@@ -97,7 +108,7 @@ namespace LKK
         {
             if (Program.status == 1)
             {
-                workMode.Text = "Режим роботи: Робота з призначенням інсуліну";
+                workMode.Text = "Режим роботи: Робота з реєстром інвалідів";
             }
             else 
             {

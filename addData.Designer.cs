@@ -80,6 +80,7 @@
             this.Controls.Add(this.confirn);
             this.Controls.Add(this.valueToEdit);
             this.Name = "addData";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addData";
             this.Load += new System.EventHandler(this.addData_Load);
             this.ResumeLayout(false);

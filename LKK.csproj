@@ -155,6 +155,12 @@
     <Compile Include="formData.Designer.cs">
       <DependentUpon>formData.cs</DependentUpon>
     </Compile>
+    <Compile Include="invalidityRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="invalidityRegister.Designer.cs">
+      <DependentUpon>invalidityRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="lkkMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formData.resx">
       <DependentUpon>formData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="invalidityRegister.resx">
+      <DependentUpon>invalidityRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="lkkMain.resx">
       <DependentUpon>lkkMain.cs</DependentUpon>

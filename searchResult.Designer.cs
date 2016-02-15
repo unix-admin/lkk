@@ -40,6 +40,7 @@
             this.womans = new System.Windows.Forms.Label();
             this.mans = new System.Windows.Forms.Label();
             this.allRows = new System.Windows.Forms.Label();
+            this.deleteButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resultsLKK)).BeginInit();
             this.statistic.SuspendLayout();
             this.SuspendLayout();
@@ -96,7 +97,7 @@
             // 
             this.printButton.Location = new System.Drawing.Point(176, 278);
             this.printButton.Name = "printButton";
-            this.printButton.Size = new System.Drawing.Size(122, 32);
+            this.printButton.Size = new System.Drawing.Size(95, 32);
             this.printButton.TabIndex = 4;
             this.printButton.Text = "Друк";
             this.printButton.UseVisualStyleBackColor = true;
@@ -104,9 +105,9 @@
             // 
             // editButton
             // 
-            this.editButton.Location = new System.Drawing.Point(347, 278);
+            this.editButton.Location = new System.Drawing.Point(290, 278);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(122, 32);
+            this.editButton.Size = new System.Drawing.Size(95, 32);
             this.editButton.TabIndex = 6;
             this.editButton.Text = "Змінити";
             this.editButton.UseVisualStyleBackColor = true;
@@ -172,11 +173,22 @@
             this.allRows.TabIndex = 0;
             this.allRows.Text = "Всього записів: ";
             // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(405, 278);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(91, 32);
+            this.deleteButton.TabIndex = 8;
+            this.deleteButton.Text = "Видалити";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // searchResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 354);
+            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.statistic);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.printButton);
@@ -209,5 +221,6 @@
         private System.Windows.Forms.Label womans;
         private System.Windows.Forms.Label mans;
         private System.Windows.Forms.Label allRows;
+        private System.Windows.Forms.Button deleteButton;
     }
 }

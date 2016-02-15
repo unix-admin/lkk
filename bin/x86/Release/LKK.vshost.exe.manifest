@@ -58,14 +58,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LKK.exe" size="1127936">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LKK.exe" size="1148416">
       <assemblyIdentity name="LKK" version="2.0.0.1" publicKeyToken="568E30EBEBE1C4E4" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ROd0DdjtzRz5Udca48SfgKzljs4=</dsig:DigestValue>
+        <dsig:DigestValue>t0XJKK03hCJTNReiuh/iXKmvLL0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

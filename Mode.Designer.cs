@@ -49,10 +49,10 @@
             this.modeInsulin.AutoSize = true;
             this.modeInsulin.Location = new System.Drawing.Point(48, 70);
             this.modeInsulin.Name = "modeInsulin";
-            this.modeInsulin.Size = new System.Drawing.Size(187, 17);
+            this.modeInsulin.Size = new System.Drawing.Size(167, 17);
             this.modeInsulin.TabIndex = 1;
             this.modeInsulin.TabStop = true;
-            this.modeInsulin.Text = "Робота з призначенням інсуліну";
+            this.modeInsulin.Text = "Робота з реєстром інвалідів";
             this.modeInsulin.UseVisualStyleBackColor = true;
             // 
             // changeButton
@@ -73,8 +73,11 @@
             this.Controls.Add(this.changeButton);
             this.Controls.Add(this.modeInsulin);
             this.Controls.Add(this.modeLkk);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Mode";
-            this.Text = "Mode";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Режим роботи";
             this.Shown += new System.EventHandler(this.Mode_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

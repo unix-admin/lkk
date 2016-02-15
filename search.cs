@@ -11,11 +11,20 @@ namespace LKK
     public partial class search : Form
     {
         public lkkSearchData searchData;
+        public invaliditySearchData invalidityData;
         private Database lkkDatabase = new Database();
         public search()
         {
             InitializeComponent();
             initSearchData();
+            if (Program.status == 1)
+            {
+                startLKKdate.Visible = false;
+                endLKKDate.Visible = false;
+                lkkDateBox.Text = "Непрацюючі (Непрацюючі батьки)";
+                lkkDateBox.Checked = false;
+                betweenLKK.Visible = false;
+            }
             regionBox.DataSource = lkkDatabase.getRegions();
             regionBox.DisplayMember = "title";
             diagnoseBox.DataSource = lkkDatabase.getDiagnose(true);
@@ -29,7 +38,7 @@ namespace LKK
             searchData.dateEnd = Convert.ToDateTime("01.01.1900");
             searchData.ageStart = null;
             searchData.ageEnd = null;
-            searchData.fio = null;
+            searchData.fio = "";
             searchData.region = null;
             searchData.diagnose = null;
             searchData.lpz = null;
@@ -73,8 +82,28 @@ namespace LKK
             {
                 searchData.orphanDiseases = true;
             }
+
+            invalidityData.working = lkkDateBox.Checked;
+            invalidityData.fio = surnameText.Text;
+            invalidityData.ageStart = searchData.ageStart;
+            invalidityData.ageEnd = searchData.ageEnd;
+            invalidityData.region = searchData.region;
+            invalidityData.diagnose = searchData.diagnose;
+            invalidityData.lpz = searchData.lpz;
+            invalidityData.excludeTill18 = searchData.excludeTill18;
+            invalidityData.orphanDiseases = searchData.orphanDiseases;
             searchResult result = new searchResult();
-            result.start(searchData);
+            if (Program.status == 0)
+            {
+                result.start(searchData);
+            }
+            else 
+            {
+                result.start(invalidityData);
+            }
+
+            
+            
             result.MdiParent = this.MdiParent;
             result.Show();
             initSearchData();
